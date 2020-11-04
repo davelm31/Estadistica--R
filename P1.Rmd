@@ -1,0 +1,98 @@
+---
+title: "Presentación de Estadistica y probabilidad - 1"
+output: html_notebook
+---
+```{r, echo = FALSE}
+rm(list=ls()) 
+```
+
+```{r, echo = FALSE}
+library(readr)
+library(dplyr)
+```
+
+```{r, echo = FALSE}
+DD <- read_csv("denuncias.csv")
+CAS <- read_csv("CAS.csv")
+```
+
+# Análisis de la relación entre las denuncias y la contaminación en los últimos 3 años
+
+### Integrantes:
+David León, Harold Canto Vidal, Marcelo Surco Salas, Gonzalo Suárez
+
+### Importancia
+En los 3 últimos años se han presentados denuncias por contaminación ambiental que afectan el agua, aire, fauna y entre otras. 
+
+### Objetivo
+Determinar si hay relación entre la contaminación de suelos y las denuncias por contaminación ambiental en los últimos 3 años.
+
+### Informacion
+
+La  información es obtenida de OEFA datos abiertos. Principalmente estamos pensando trabajar con 2 bases que son denuncias SINADA y componentes ambientales del suelo- EAT.
+Otros datos son: contaminación de agua, fauna y flora entre otros.
+
+
+### Observaciones completas y datos faltantes
+En denuncias SINADA:
+
+```{r, echo=FALSE}
+
+Obs <- c("Observaciones","Observaciones incompletas","Datos faltantes", "Variables Totales")
+N <- c(nrow(DD),sum(!complete.cases(DD)),sum(is.na(DD)), ncol(DD) )
+OB1 <- data.frame(Obs,N)
+OB1
+```
+Componentes ambientales del suelo-EAT
+```{r echo=FALSE}
+
+Obs2 <- c("Observaciones","Observaciones incompletas","Datos faltantes", "Variables Totales")
+N2 <- c(nrow(CAS),sum(!complete.cases(CAS)),sum(is.na(CAS)), ncol(CAS))
+OB2 <- data.frame(Obs2,N2)
+OB2
+```
+En componentes ambientales del suelo vemos que las observaciones incompletas y las observaciones son iguales. Esto se debe en que hay muestras donde no se encuentran ciertas sustancias. Tenemos el caso de cromo hexavalente o cianuro libre.
+
+
+### Datos
+En los cuadros anteriores vimos que tenemos en la primera base de datos 23 variables y en la segunda 54. Escogimos las mas relevantes.
+```{r, echo =FALSE}
+Variables <- c("Departamento", "Provincia" ,"Distrito", "Actividad económica","Tipo de contaminacion","ESTE","NORTE","Aluminio",	"Antimonio",	"Arsénico",	"Bario",	"Berilio",	"Bismuto",	"Boro",	"Cadmio")
+`Tipo_de_Variable` <- c("Nominal","Nominal","Nominal","Nominal","Nominal","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas")
+
+ED <- data.frame(Variables,`Tipo_de_Variable`)
+ED
+```
+
+### Cantidad de denuncia por tipo de contaminación
+
+```{r,  echo= FALSE}
+tipo <- c("AGUA","SUELO","FAUNA","AIRE","FLORA","POBLACION","EFLUENTES","RESIDUOS SOLIDOS","GASES/HUMO","MATERIAL PARTICULADO`","TALA","RADIACION NO IONIZANTE","FUENTE VISUAL","FUENTE VISUAL")
+
+cantidad <- c(sum(DD$AGUA),
+sum(DD$SUELO),sum(DD$FAUNA),sum(DD$AIRE),
+sum(DD$FLORA),sum(DD$POBLACION),sum(DD$EFLUENTES),sum(DD$`RESIDUOS SOLIDOS`),sum(DD$`GASES/HUMO`),sum(DD$`MATERIAL PARTICULADO`),sum(DD$TALA),sum(DD$`RADIACION NO IONIZANTE`),sum(DD$`FUENTE VISUAL`),sum(DD$`FUENTE VISUAL`))
+
+colores <- c("deepskyblue1","lightgoldenrod4","darkolivegreen1", "lightcyan","darkolivegreen3","gold2","navajowhite3","gray45","gray","seashell4","burlywood4", "indianred3", "skyblue3", "bisque3")
+
+DDA<-data.frame(tipo, cantidad)
+barplot(DDA[1:14,2],legend=c("AGUA","SUELO","FAUNA","AIRE","FLORA","POBLACION","EFLUENTES","RESIDUOS SOLIDOS","GASES/HUMO","MATERIAL PARTICULADO`","TALA","RADIACION NO IONIZANTE","FUENTE VISUAL","FUENTE VISUAL"), col =colores)
+```
+
+
+### Diagrama de caja de variable - data: Componentes ambientales del suelo-EAT
+
+```{r, echo=FALSE}
+boxplot(CAS$Aluminio, horizontal = TRUE, main = "Aluminio", col="cornsilk2", xlab= "Aluminio (mg/m3)",pch= 19, ylim=c(0,45000) )
+abline(v = mean(CAS$Aluminio, na.rm = TRUE, ), col = "red")
+mean(CAS$Aluminio, na.rm=TRUE, col="red")
+median(CAS$Aluminio, na.rm=TRUE)
+```
+
+º
+
+
+
+
+
+
