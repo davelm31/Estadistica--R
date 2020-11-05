@@ -24,7 +24,7 @@ CAS <- read_csv("CAS.csv")
 David León, Harold Canto Vidal, Marcelo Surco Salas, Gonzalo Suárez
 
 ### Importancia
-En los 3 últimos años se han presentados denuncias por contaminación ambiental que afectan el agua, aire, fauna y entre otras. 
+Generar y brindar un aporte académico acerca de las denuncias por contaminación ambiental en los ultimos 3 años que afectan el agua, aire, fauna y entre otras. 
 
 ### Objetivo
 Determinar si hay relación entre la contaminación de suelos y las denuncias por contaminación ambiental en los últimos 3 años.
