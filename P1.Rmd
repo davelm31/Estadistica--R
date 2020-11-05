@@ -12,7 +12,8 @@ library(dplyr)
 ```
 
 ```{r, echo = FALSE}
-DD <- read_csv("denuncias.csv")
+DD1920 <- read_csv("Denuncias1920.csv")
+DD18 <- read_csv("Denuncias-18.csv")
 CAS <- read_csv("CAS.csv")
 ```
 
@@ -35,14 +36,24 @@ Otros datos son: contaminación de agua, fauna y flora entre otros.
 
 ### Observaciones completas y datos faltantes
 En denuncias SINADA:
-
+2018
 ```{r, echo=FALSE}
 
 Obs <- c("Observaciones","Observaciones incompletas","Datos faltantes", "Variables Totales")
-N <- c(nrow(DD),sum(!complete.cases(DD)),sum(is.na(DD)), ncol(DD) )
+N <- c(nrow(DD18),sum(!complete.cases(DD18)),sum(is.na(DD18)), ncol(DD18) )
 OB1 <- data.frame(Obs,N)
 OB1
 ```
+
+2019-2020
+```{r, echo=FALSE}
+
+Obs3 <- c("Observaciones","Observaciones incompletas","Datos faltantes", "Variables Totales")
+N3 <- c(nrow(DD1920),sum(!complete.cases(DD1920)),sum(is.na(DD1920)), ncol(DD1920) )
+OB3 <- data.frame(Obs3,N3)
+OB3
+```
+
 Componentes ambientales del suelo-EAT
 ```{r echo=FALSE}
 
@@ -51,6 +62,8 @@ N2 <- c(nrow(CAS),sum(!complete.cases(CAS)),sum(is.na(CAS)), ncol(CAS))
 OB2 <- data.frame(Obs2,N2)
 OB2
 ```
+
+
 En componentes ambientales del suelo vemos que las observaciones incompletas y las observaciones son iguales. Esto se debe en que hay muestras donde no se encuentran ciertas sustancias. Tenemos el caso de cromo hexavalente o cianuro libre.
 
 
@@ -69,9 +82,9 @@ ED
 ```{r,  echo= FALSE}
 tipo <- c("AGUA","SUELO","FAUNA","AIRE","FLORA","POBLACION","EFLUENTES","RESIDUOS SOLIDOS","GASES/HUMO","MATERIAL PARTICULADO`","TALA","RADIACION NO IONIZANTE","FUENTE VISUAL","FUENTE VISUAL")
 
-cantidad <- c(sum(DD$AGUA),
-sum(DD$SUELO),sum(DD$FAUNA),sum(DD$AIRE),
-sum(DD$FLORA),sum(DD$POBLACION),sum(DD$EFLUENTES),sum(DD$`RESIDUOS SOLIDOS`),sum(DD$`GASES/HUMO`),sum(DD$`MATERIAL PARTICULADO`),sum(DD$TALA),sum(DD$`RADIACION NO IONIZANTE`),sum(DD$`FUENTE VISUAL`),sum(DD$`FUENTE VISUAL`))
+cantidad <- c(sum(DD1920$AGUA),
+sum(DD1920$SUELO),sum(DD1920$FAUNA),sum(DD1920$AIRE),
+sum(DD1920$FLORA),sum(DD1920$POBLACION),sum(DD1920$EFLUENTES),sum(DD1920$`RESIDUOS SOLIDOS`),sum(DD1920$`GASES/HUMO`),sum(DD1920$`MATERIAL PARTICULADO`),sum(DD1920$TALA),sum(DD1920$`RADIACION NO IONIZANTE`),sum(DD1920$`FUENTE VISUAL`),sum(DD1920$`FUENTE VISUAL`))
 
 colores <- c("deepskyblue1","lightgoldenrod4","darkolivegreen1", "lightcyan","darkolivegreen3","gold2","navajowhite3","gray45","gray","seashell4","burlywood4", "indianred3", "skyblue3", "bisque3")
 
