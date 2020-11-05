@@ -9,6 +9,7 @@ rm(list=ls())
 ```{r, echo = FALSE}
 library(readr)
 library(dplyr)
+
 ```
 
 ```{r, echo = FALSE}
@@ -73,6 +74,7 @@ En los cuadros anteriores vimos que tenemos en la primera base de datos 23 varia
 Variables <- c("Departamento", "Provincia" ,"Distrito", "Actividad económica","Tipo de contaminacion","ESTE","NORTE","Aluminio",	"Antimonio",	"Arsénico",	"Bario",	"Berilio",	"Bismuto",	"Boro",	"Cadmio")
 `Tipo_de_Variable` <- c("Nominal","Nominal","Nominal","Nominal","Nominal","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas")
 
+
 ED <- data.frame(Variables,`Tipo_de_Variable`)
 ED
 ```
@@ -102,7 +104,32 @@ mean(CAS$Aluminio, na.rm=TRUE, col="red")
 median(CAS$Aluminio, na.rm=TRUE)
 ```
 
-º
+
+```{r}
+#DEnuncias 2018
+DEP18 <- c("Lima","Ancash","Cusco", "Arequipa","Libertad", "Junin","Ica","Piura","Callao","Lambayeque","Apurimac" )
+CAN18 <- c(sum(DD18$DEPARTAMENTO == "LIMA"),sum(DD18$DEPARTAMENTO == "ANCASH"),sum(DD18$DEPARTAMENTO == "CUSCO"),sum(DD18$DEPARTAMENTO == "AREQUIPA"),sum(DD18$DEPARTAMENTO == "LA LIBERTAD"),sum(DD18$DEPARTAMENTO == "JUNIN"),sum(DD18$DEPARTAMENTO == "ICA"),sum(DD18$DEPARTAMENTO == "PIURA"),sum(DD18$DEPARTAMENTO == "CALLAO"),sum(DD18$DEPARTAMENTO == "LAMBAYEQUE"),sum(DD18$DEPARTAMENTO == "APURIMAC"))
+Tabla18 <- data.frame(DEP18,CAN18)
+barplot(Tabla18[1:20,2])
+```
+
+
+```{r}
+table(DD18$DEPARTAMENTO)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
