@@ -104,20 +104,41 @@ mean(CAS$Aluminio, na.rm=TRUE, col="red")
 median(CAS$Aluminio, na.rm=TRUE)
 ```
 
-
+## Denuncias en los departamentetos
 ```{r}
 #DEnuncias 2018
-DEP18 <- c("Lima","Ancash","Cusco", "Arequipa","Libertad", "Junin","Ica","Piura","Callao","Lambayeque","Apurimac" )
-CAN18 <- c(sum(DD18$DEPARTAMENTO == "LIMA"),sum(DD18$DEPARTAMENTO == "ANCASH"),sum(DD18$DEPARTAMENTO == "CUSCO"),sum(DD18$DEPARTAMENTO == "AREQUIPA"),sum(DD18$DEPARTAMENTO == "LA LIBERTAD"),sum(DD18$DEPARTAMENTO == "JUNIN"),sum(DD18$DEPARTAMENTO == "ICA"),sum(DD18$DEPARTAMENTO == "PIURA"),sum(DD18$DEPARTAMENTO == "CALLAO"),sum(DD18$DEPARTAMENTO == "LAMBAYEQUE"),sum(DD18$DEPARTAMENTO == "APURIMAC"))
+
+DEP18 <- c("Lima","Ancash","Cusco", "Arequipa","Libertad", "Junin","Ica","Piura","Callao","Lambayeque","Apurimac","Ucayali","Cajamarca","Ayacucho","Loreto" ,"Moquegua","Tumbes","Pasco","Tacna","San Martin","Huanuco","Puno","Amazonas","Huancavelica","Madre de Dios")
+
+CAN18 <- c(sum(DD18$DEPARTAMENTO == "LIMA"),sum(DD18$DEPARTAMENTO == "ANCASH"),sum(DD18$DEPARTAMENTO == "CUSCO"),sum(DD18$DEPARTAMENTO == "AREQUIPA"),sum(DD18$DEPARTAMENTO == "LA LIBERTAD"),sum(DD18$DEPARTAMENTO == "JUNIN"),sum(DD18$DEPARTAMENTO == "ICA"),sum(DD18$DEPARTAMENTO == "PIURA"),sum(DD18$DEPARTAMENTO == "CALLAO"),sum(DD18$DEPARTAMENTO == "LAMBAYEQUE"),sum(DD18$DEPARTAMENTO == "APURIMAC"),sum(DD18$DEPARTAMENTO == "UCAYALI"),sum(DD18$DEPARTAMENTO == "CAJAMARCA"),sum(DD18$DEPARTAMENTO == "AYACUCHO"),sum(DD18$DEPARTAMENTO == "LORETO"),sum(DD18$DEPARTAMENTO == "MOQUEGUA"),sum(DD18$DEPARTAMENTO == "TUMBES"),sum(DD18$DEPARTAMENTO == "PASCO"),sum(DD18$DEPARTAMENTO == "TACNA"),sum(DD18$DEPARTAMENTO == "SAN MARTIN"),sum(DD18$DEPARTAMENTO == "HUANUCO"),sum(DD18$DEPARTAMENTO == "PUNO"),sum(DD18$DEPARTAMENTO == "AMAZONAS"),sum(DD18$DEPARTAMENTO == "HUANCAVELICA"),sum(DD18$DEPARTAMENTO == "MADRE DE DIOS"))
+
 Tabla18 <- data.frame(DEP18,CAN18)
-barplot(Tabla18[1:20,2])
+Tabla18
+
+
 ```
 
 
 ```{r}
-table(DD18$DEPARTAMENTO)
+barplot(Tabla18[1:25,2],legend=c("Lima","Ancash","Cusco", "Arequipa","Libertad", "Junin","Ica","Piura","Callao","Lambayeque","Apurimac","Ucayali","Cajamarca","Ayacucho","Loreto" ,"Moquegua","Tumbes","Pasco","Tacna","San Martin","Huanuco","Puno","Amazonas","Huancavelica","Madre de Dios"))
 ```
 
+```{r}
+#denuncias 2019-2020
+
+DEP1920 <- c("Lima","Ancash","Cusco", "Arequipa","Libertad", "Junin","Ica","Piura","Callao","Lambayeque","Apurimac","Ucayali","Cajamarca","Ayacucho","Loreto" ,"Moquegua","Tumbes","Pasco","Tacna","San Martin","Huanuco","Puno","Amazonas","Huancavelica","Madre de Dios")
+
+CAN1920 <- c(sum(DD1920$DEPARTAMENTO == "LIMA"),sum(DD1920$DEPARTAMENTO == "ANCASH"),sum(DD1920$DEPARTAMENTO == "CUSCO"),sum(DD1920$DEPARTAMENTO == "AREQUIPA"),sum(DD1920$DEPARTAMENTO == "LA LIBERTAD"),sum(DD1920$DEPARTAMENTO == "JUNIN"),sum(DD1920$DEPARTAMENTO == "ICA"),sum(DD1920$DEPARTAMENTO == "PIURA"),sum(DD1920$DEPARTAMENTO == "CALLAO"),sum(DD1920$DEPARTAMENTO == "LAMBAYEQUE"),sum(DD1920$DEPARTAMENTO == "APURIMAC"),sum(DD1920$DEPARTAMENTO == "UCAYALI"),sum(DD1920$DEPARTAMENTO == "CAJAMARCA"),sum(DD1920$DEPARTAMENTO == "AYACUCHO"),sum(DD1920$DEPARTAMENTO == "LORETO"),sum(DD1920$DEPARTAMENTO == "MOQUEGUA"),sum(DD1920$DEPARTAMENTO == "TUMBES"),sum(DD1920$DEPARTAMENTO == "PASCO"),sum(DD1920$DEPARTAMENTO == "TACNA"),sum(DD1920$DEPARTAMENTO == "SAN MARTIN"),sum(DD1920$DEPARTAMENTO == "HUANUCO"),sum(DD1920$DEPARTAMENTO == "PUNO"),sum(DD1920$DEPARTAMENTO == "AMAZONAS"),sum(DD1920$DEPARTAMENTO == "HUANCAVELICA"),sum(DD1920$DEPARTAMENTO == "MADRE DE DIOS"))
+
+Tabla1920 <- data.frame(DEP1920,CAN1920)
+Tabla1920
+
+```
+
+
+```{r}
+barplot(Tabla1920[1:25,2],legend=c("Lima","Ancash","Cusco", "Arequipa","Libertad", "Junin","Ica","Piura","Callao","Lambayeque","Apurimac","Ucayali","Cajamarca","Ayacucho","Loreto" ,"Moquegua","Tumbes","Pasco","Tacna","San Martin","Huanuco","Puno","Amazonas","Huancavelica","Madre de Dios"))
+```
 
 
 
