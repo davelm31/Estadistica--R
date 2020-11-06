@@ -183,9 +183,30 @@ color <- c("green", "red")
 DDS_19<-data.frame(estado_19, cantidad_d_19)
 barplot(DDS_19[1:3,2], legend = c("CERRADO", "EN SEGUIMIENTO", "ARCHIVADA"), col = color, xlab = "Estado de la denuncia", ylab = "Cantidad")
 ```
+## Componetes del suelo
+Las unidades de los componentes se encuentran en mg / kg
+1 ppm = 1 mg / kg
+El cromo, niquel, plomo, zinc varia entre 1-1500 mg/kg
 
+```{r}
 
+table(CAS$Cromo > 1 & CAS$Cromo < 1500)
+#contaminacion por niquel
+table(CAS$Níquel > 1 & CAS$Níquel < 1500)
+table(CAS$Plomo > 1 & CAS$Plomo < 1500)
+table(CAS$Zinc > 1 & CAS$Zinc < 1500)
 
+```
+
+ El Cobalto, Cobre y Arsénico varian entre 0.1 - 250 mg/kg
+```{r}
+table(CAS$Cobre > 0.1 & CAS$Cobre < 250)
+# Contaminacion por cobalto
+table(CAS$Cobalto > 0.1 & CAS$Cobalto < 250)
+# Contaminacion por arsenico
+table(CAS$Arsénico > 0.1 & CAS$Arsénico < 250)
+
+```
 
 
 
