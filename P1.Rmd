@@ -23,20 +23,21 @@ CAS <- read_csv("CAS.csv")
 David León, Harold Canto Vidal, Marcelo Surco Salas, Gonzalo Suárez
 
 ### Importancia
-Generar y brindar un aporte académico acerca de las denuncias por contaminación ambiental en los ultimos 3 años en el Perú que afectan el agua, aire, fauna y entre otras. 
+Hoy en día Lima es una de las ciudades considerada como la octava ciudad mas contaminada a nivel de américa latina y el Perú es considerada en el puesto 22 a nivel mundial según World Air  Quality. Esta investigación permitira brindar un aporte académico acerca de las denuncias por contaminación ambiental en los últimos 3 años en el Perú que afectan el agua, aire, fauna y entre otras. 
 
 ### Objetivo
-Determinar si existe una relación entre la contaminación de suelos y las denuncias por contaminación ambiental en los últimos 3 años en el Perú.
+Determinar si existe una relación entre la contaminación de suelos y las denuncias por contaminación ambiental dependiendo su ubicación en los últimos 3 años en el Perú.
 
 ### Base de datos
 
-La  información es obtenida de OEFA datos abiertos. Principalmente estamos pensando trabajar con 2 bases que son denuncias SINADA y componentes ambientales del suelo- EAT.
-Otros datos son: contaminación de agua, fauna y flora entre otros.
+La  información es obtenida de OEFA datos abiertos. Se trabajara con 3 bases que son denuncias SINADA y componentes ambientales del suelo- EAT.
+Otras bases de datos son: contaminación de agua, fauna y flora entre otros.
 
 
 ### Observaciones completas y datos faltantes
 En denuncias SINADA:
 2018
+No se presenta ningún dato faltante ni observación faltante.
 ```{r, echo=FALSE}
 
 Obs <- c("Observaciones","Observaciones incompletas","Datos faltantes", "Variables Totales")
@@ -45,7 +46,9 @@ OB1 <- data.frame(Obs,N)
 OB1
 ```
 
+
 2019-2020
+No se presenta ningún dato faltante ni observación faltante.
 ```{r, echo=FALSE}
 
 Obs3 <- c("Observaciones","Observaciones incompletas","Datos faltantes", "Variables Totales")
@@ -55,6 +58,8 @@ OB3
 ```
 
 Componentes ambientales del suelo-EAT
+ 
+En componentes ambientales del suelo vemos que las observaciones incompletas y las observaciones son iguales. Esto se debe en que hay muestras donde no se encuentran ciertas sustancias. Tenemos el caso de cromo hexavalente o cianuro libre.
 ```{r echo=FALSE}
 
 Obs2 <- c("Observaciones","Observaciones incompletas","Datos faltantes", "Variables Totales")
@@ -64,11 +69,11 @@ OB2
 ```
 
 
-En componentes ambientales del suelo vemos que las observaciones incompletas y las observaciones son iguales. Esto se debe en que hay muestras donde no se encuentran ciertas sustancias. Tenemos el caso de cromo hexavalente o cianuro libre.
 
 
 ### Datos
-En los cuadros anteriores vimos que tenemos en la primera base de datos 23 variables y en la segunda 54. Escogimos las mas relevantes.
+
+La base de datos del componentes del suelo tenemos 54 variables y el de las denuncias 23. Presentamos algunas de ellas y relevantes para nuestro trabajo.
 ```{r, echo =FALSE}
 Variables <- c("Departamento", "Provincia" ,"Distrito", "Actividad económica","Tipo de contaminacion","ESTE","NORTE","Aluminio",	"Bario")
 
@@ -94,13 +99,15 @@ colores <- c("deepskyblue1","lightgoldenrod4","darkolivegreen1", "lightcyan","da
 DDA<-data.frame(tipo, cantidad)
 barplot(DDA[1:14,2],legend=c("AGUA","SUELO","FAUNA","AIRE","FLORA","POBLACION","EFLUENTES","RESIDUOS SOLIDOS","GASES/HUMO","MATERIAL PARTICULADO`","TALA","RADIACION NO IONIZANTE","FUENTE VISUAL","FUENTE VISUAL"), col =colores)
 ```
-La mayor cantidad de denuncias wa por la contaminacion de suelos
+La mayor cantidad de denuncias son por la contaminación de suelos, seguidos de aire y residuos solidos.
 
 
 
 ## Denuncias en los departamentetos
 
 ### En el 2018
+
+La mayor cantidad de denuncias son en el departamento de Lima
 ```{r, echo=FALSE}
 #DEnuncias 2018
 
@@ -110,7 +117,7 @@ CAN18 <- c(sum(DD18$DEPARTAMENTO == "LIMA"),sum(DD18$DEPARTAMENTO == "ANCASH"),s
 
 Tabla18 <- data.frame(DEP18,CAN18)
 
-barplot(Tabla18[1:25,2],legend=c("Lima","Ancash","Cusco", "Arequipa","Libertad", "Junin","Ica","Piura","Callao","Lambayeque","Apurimac","Ucayali","Cajamarca","Ayacucho","Loreto" ,"Moquegua","Tumbes","Pasco","Tacna","San Martin","Huanuco","Puno","Amazonas","Huancavelica","Madre de Dios"), col=colores)
+barplot(Tabla18[1:25,2],legend=c("Lima","Ancash","Cusco", "Arequipa","Libertad", "Junin","Ica","Piura","Callao","Lambayeque","Apurimac","Ucayali","Cajamarca","Ayacucho","Loreto" ,"Moquegua","Tumbes","Pasco","Tacna","San Martin","Huanuco","Puno","Amazonas","Huancavelica","Madre de Dios"), col=colores,xlab= "Departamentos", ylab="Denuncias 2018")
 
 
 ```
@@ -118,6 +125,7 @@ barplot(Tabla18[1:25,2],legend=c("Lima","Ancash","Cusco", "Arequipa","Libertad",
 
 ### Tipo de sector
 
+Las denuncias por tipo de sector de mayor cantidad son infraestructura , industria , minería y comercio.
 ```{r, echo=FALSE}
 #Sector economico 2018
 ACTECO18 <- c("INFRAESTRUCTURA","INDUSTRIA", "MINERIA","COMERCIO","SANEAMIENTO","AGRICULTURA","HIDROCARBUROS","TRANSPORTE","GANADERIA","PESQUERIA","FORESTAL","CONSTRUCCION","ELECTRICIDAD","TELECOMUNICACIONES","TURISMO" )
@@ -126,14 +134,14 @@ CAN18 <- c(sum(DD18$SECTOR == "INFRAESTRUCTURA"),sum(DD18$SECTOR == "INDUSTRIA")
 
 tabla18 <- data.frame(ACTECO18,CAN18)
 
-barplot(tabla18[1:20,2], legend= c("INFRAESTRUCTURA","INDUSTRIA", "MINERIA","COMERCIO","SANEAMIENTO","AGRICULTURA","HIDROCARBUROS","TRANSPORTE","GANADERIA","PESQUERIA","FORESTAL","CONSTRUCCION","ELECTRICIDAD","TELECOMUNICACIONES","TURISMO" ), col=colores)
+barplot(tabla18[1:20,2], legend= c("INFRAESTRUCTURA","INDUSTRIA", "MINERIA","COMERCIO","SANEAMIENTO","AGRICULTURA","HIDROCARBUROS","TRANSPORTE","GANADERIA","PESQUERIA","FORESTAL","CONSTRUCCION","ELECTRICIDAD","TELECOMUNICACIONES","TURISMO" ), col=colores, xlab ="Sector",ylab="Denuncias 2018")
 ```
 
 
 
 ### En el 2019-2020
 
-
+En el 2019 y 2020 Lima presenta mayor cantidad de denuncias.
 ```{r, echo=FALSE}
 #denuncias 2019-2020
 
@@ -143,11 +151,12 @@ CAN1920 <- c(sum(DD1920$DEPARTAMENTO == "LIMA"),sum(DD1920$DEPARTAMENTO == "ANCA
 
 Tabla1920 <- data.frame(DEP1920,CAN1920)
 
-barplot(Tabla1920[1:25,2],legend=c("Lima","Ancash","Cusco", "Arequipa","Libertad", "Junin","Ica","Piura","Callao","Lambayeque","Apurimac","Ucayali","Cajamarca","Ayacucho","Loreto" ,"Moquegua","Tumbes","Pasco","Tacna","San Martin","Huanuco","Puno","Amazonas","Huancavelica","Madre de Dios"),col = colores)
+barplot(Tabla1920[1:25,2],legend=c("Lima","Ancash","Cusco", "Arequipa","Libertad", "Junin","Ica","Piura","Callao","Lambayeque","Apurimac","Ucayali","Cajamarca","Ayacucho","Loreto" ,"Moquegua","Tumbes","Pasco","Tacna","San Martin","Huanuco","Puno","Amazonas","Huancavelica","Madre de Dios"),col = colores, xlab="Departamento",ylab="Denuncias 2019-2020")
 
 ```
 ### Tipo de sector
 
+La mayor cantidad de denuncias es por infraestructura
 ```{r,echo=FALSE}
 #Sector economico 2019-2020
 ACTECO1920 <- c("INFRAESTRUCTURA","INDUSTRIA", "MINERIA","COMERCIO","SANEAMIENTO","AGRICULTURA","HIDROCARBUROS","TRANSPORTE","GANADERIA","PESQUERIA","FORESTAL","CONSTRUCCION","ELECTRICIDAD","TELECOMUNICACIONES","TURISMO" )
@@ -156,22 +165,22 @@ CAN1920 <- c(sum(DD1920$`ACTIVIDAD ECONOMICA` == "INFRAESTRUCTURA"),sum(DD1920$`
 
 tabla1920 <- data.frame(ACTECO1920,CAN1920)
 
-barplot(tabla1920[1:20,2], legend= c("INFRAESTRUCTURA","INDUSTRIA", "MINERIA","COMERCIO","SANEAMIENTO","AGRICULTURA","HIDROCARBUROS","TRANSPORTE","GANADERIA","PESQUERIA","FORESTAL","CONSTRUCCION","ELECTRICIDAD","TELECOMUNICACIONES","TURISMO" ), col= colores)
+barplot(tabla1920[1:20,2], legend= c("INFRAESTRUCTURA","INDUSTRIA", "MINERIA","COMERCIO","SANEAMIENTO","AGRICULTURA","HIDROCARBUROS","TRANSPORTE","GANADERIA","PESQUERIA","FORESTAL","CONSTRUCCION","ELECTRICIDAD","TELECOMUNICACIONES","TURISMO" ), col= colores,xlab="Sector", ylab="Denuncia 2019-2020")
 ```
 
 
 
 ### Diagrama de denuncias cerradas y pendientes en el año 2018
 ```{r, echo=FALSE}
-estado <- c("Cerrado", "En Seguimiento")
+estado <- c("Cerrado", "En Seguimiento", "Archivada")
 
-cantidad_d <- c(sum(DD18$ESTADO == "CERRADA"),sum(DD18$ESTADO == "EN SEGUIMIENTO"))
+cantidad_d <- c(sum(DD18$ESTADO == "CERRADA"),sum(DD18$ESTADO == "EN SEGUIMIENTO"),sum(DD18$ESTADO=="ARCHIVDA "))
 
 color <- c("green", "red")
 
 DDS<-data.frame(estado, cantidad_d)
 
-barplot(DDS[1:3,2], legend = c("CERRADO", "EN SEGUIMIENTO"), col = color, xlab = "Estado de la denuncia", ylab = "Cantidad")
+barplot(DDS[1:3,2], legend = c("CERRADO", "EN SEGUIMIENTO","ARCHIVADA"), col = color, xlab = "Estado de la denuncia", ylab = "Cantidad")
 ```
 
 
@@ -218,17 +227,17 @@ COMS
 ```
 
  El Cobalto, Cobre y Arsénico varian entre 0.1 - 250 mg/kg
-```{r}
-z <- sum(CAS$Cobre > 0.1 & CAS$Cobre < 250)
+```{r, echo=FALSE}
+z <- sum(CAS$Cobre > 0.1 & CAS$Cobre < 250, na.rm=TRUE)
 x <- sum(CAS$Cobalto > 0.1 & CAS$Cobalto < 250, na.rm=TRUE)
-y <- sum(CAS$Arsénico > 0.1 & CAS$Arsénico < 250)
+y <- sum(CAS$Arsénico > 0.1 & CAS$Arsénico < 250, na.rm=TRUE)
 m <- c(z,y,y)
 s <- c("Cobre","Cobalto","Asénico")
 COM2 <- data.frame(s,m)
 COM2
 ```
 
-
+El níquel, cobalto y arsénico solo presentan algunas de las observaciones dentro del rango.
 
 
 
