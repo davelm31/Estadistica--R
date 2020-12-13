@@ -14,8 +14,44 @@ library(dplyr)
 ```{r, echo = FALSE}
 DD1920 <- read_csv("Denuncias1920.csv")
 DD18 <- read_csv("Denuncias-18.csv")
-CAS <- read_csv("CAS.csv")
+CAS <- read_csv("CAS.csv", col_types = cols(Aluminio = col_number(), 
+    Antimonio = col_number(), `Arsénico` = col_number(), 
+    Bario = col_number(), Berilio = col_number(), 
+    Bismuto = col_number(), Boro = col_number(), 
+    Cadmio = col_number(), Calcio = col_number(), 
+    Cerio = col_number(), `Cianuro libre` = col_number(), 
+    Cobalto = col_number(), Cobre = col_number(), 
+    Cromo = col_number(), `Estaño` = col_number(), 
+    Estroncio = col_number(), Fósforo = col_number(), 
+    Hierro = col_number(), Litio = col_number(), 
+    Magnesio = col_number(), Manganeso = col_number(), 
+    Mercurio = col_number(), Molibdeno = col_number(), 
+    `Níquel` = col_number(), Plata = col_number(), 
+    Plomo = col_number(), Potasio = col_number(), 
+    Selenio = col_number(),Sodio = col_number(), Talio = col_number(), 
+    Titanio = col_number(), Torio = col_number(), Uranio = col_number(), Zinc = col_number()))
+
 ```
+
+```{r}
+CAA <- read_csv("CAA.csv", col_types = cols(Aluminio = col_number(), 
+    `Aluminio disuelto` = col_number(), Amoniaco = col_number(), 
+    Antimonio = col_number(), `Antimonio disuelto` = col_number(), 
+    `Arsénico` = col_number(), `Arsénico disuelto` = col_number(), 
+    Bario = col_number(), `Bario disuelto` = col_number(), 
+    Berilio = col_number(), `Berilio disuelto` = col_number(), 
+    Bicarbonatos = col_number(), Bismuto = col_number(), 
+    `Bismuto disuelto` = col_number(), Boro = col_number(), 
+    `Boro disuelto` = col_number(), Cadmio = col_number(), 
+    `Cadmio disuelto` = col_number(), Calcio = col_number(), 
+    `Calcio disuelto` = col_number(), Carbonatos = col_number(), 
+    Caudal = col_number(), `Cianuro libre` = col_number(), 
+    `Cianuro Wad` = col_number(), Cloruros = col_number(), 
+    Cobalto = col_number(), `Cobalto disuelto` = col_number(), 
+    Cobre = col_number(), `Cobre disuelto` = col_number(), 
+    Cromo = col_number()))
+```
+
 
 # Análisis de la relación entre las denuncias y la contaminación en los últimos 3 años
 
@@ -71,19 +107,38 @@ OB2
 
 
 
-### Datos
+### Variables
 
 La base de datos del componentes del suelo tenemos 54 variables y el de las denuncias 23. Presentamos algunas de ellas y relevantes para nuestro trabajo.
 ```{r, echo =FALSE}
-Variables <- c("Departamento", "Provincia" ,"Distrito", "Actividad económica","Tipo de contaminacion","ESTE","NORTE","Aluminio",	"Bario")
+Variables <- c("Departamento", "Provincia" ,"Distrito", "Actividad económica","Tipo de contaminacion","Estado de la demanda")
 
-`Tipo_de_Variable` <- c("Nominal","Nominal","Nominal","Nominal","Nominal","Discretas","Discretas","Discretas","Discretas")
-Restricciones <- c("En el Peru","En el Peru", "En el Peru", "Legales","Agua, SUelo, Aire, Fauna","Coordenadas","Coordenadas", " 40973-5726 (ppm)","21.9-989 (ppm)" )
+`Tipo_de_Variable` <- c("Nominal","Nominal","Nominal","Nominal","Nominal", "Nominal")
+Restricciones <- c("En el Peru","En el Peru", "En el Peru", "Legales","Agua, SUelo, Aire, Fauna" ,"Abierta o Cerrada")
 
 ED <- data.frame(Variables,`Tipo_de_Variable`, Restricciones)
 ED
 ```
  
+
+
+
+```{r}
+Variables2 <- c("ESTE","NORTE","Aluminio","Antionio","Arsénico",	"Bario","Berilio","Bismuto","Boro","Cadmio","Calcio","Cerio","Cianuro libre","Cobalto","Cobre","Cromo","Cromo Hexavelante","Estaño", "Estroncio","Fósforo","Hierro","Litio","Magnecio","Manganeso","Mercurio","Molibdeno","Níquel","Plata","Plomo","Potasio","Selenio","Sodio","Talio","Torio")
+
+`Tipo_de_Variable2` <- c("Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas","Discretas")
+
+Restricciones2  <- c("Coordenadas","Coordenadas", " 40973-5726 (ppm)","21.9-989 (ppm)", "<0.0017-9.698(ppm)","<0.4-94(ppm)","21.9-989(ppm)","<0.001-1.85(ppm)","<0.0008-2.63(ppm)","<0.18-91.2(ppm)","<0.0007-6.256(ppm)","-9748(ppm)","8.446-9496(ppm)","<0.3(ppm)","0.481-999(ppm)","1.5-98(ppm)","1.4-99(ppm","-0.4(ppm)","<0.1-1.9(ppm)","3.03-991","60-2946(ppm)","8250-100138(ppm)","0.338-992(ppm)","229-14458(ppm)","65.6-5629(ppm)","<0.03-0.33(ppm)","<0.003-7.3(ppm)","0.679-995(ppm)","<0.006-1.29(ppm)","3.79-997(ppm)","271-7913(ppm)","<0.004-3.78(ppm)","<1-992","<0.0002-2.168(ppm)")
+
+
+ED2 <- data.frame(Variables2,`Tipo_de_Variable2`, Restricciones2)
+ED2
+```
+
+
+
+
+
 
 ### Cantidad de denuncia por tipo de contaminación en los años 2019-2020
 
@@ -98,6 +153,7 @@ colores <- c("deepskyblue1","lightgoldenrod4","darkolivegreen1", "lightcyan","da
 
 DDA<-data.frame(tipo, cantidad)
 barplot(DDA[1:14,2],legend=c("AGUA","SUELO","FAUNA","AIRE","FLORA","POBLACION","EFLUENTES","RESIDUOS SOLIDOS","GASES/HUMO","MATERIAL PARTICULADO`","TALA","RADIACION NO IONIZANTE","FUENTE VISUAL","FUENTE VISUAL"), col =colores)
+
 ```
 La mayor cantidad de denuncias son por la contaminación de suelos, seguidos de aire y residuos solidos.
 
@@ -200,31 +256,463 @@ barplot(DDS_19[1:3,2], legend = c("CERRADO", "EN SEGUIMIENTO", "ARCHIVADA"), col
 
 ### Diagrama de caja de variable - data: Componentes ambientales del suelo-EAT
 
+Relavantes
+```{r, echo=FALSE}
+boxplot(CAS$Arsénico, horizontal = TRUE, main = "Arsénico", col="cornsilk2", xlab= "Arsénico (mg/m3)",pch= 19, ylim=c(0,400) )
+abline(v = mean(CAS$Arsénico, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Arsénico, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Arsénico, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Bario, horizontal = TRUE, main = "Bario", col="cornsilk2", xlab= "Bario (mg/m3)",pch= 19, ylim=c(0,1000) )
+abline(v = mean(CAS$Bario, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Bario, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Bario, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+
+```
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Cadmio, horizontal = TRUE, main = "Cadmio", col="cornsilk2", xlab= "Cadmio (mg/m3)",pch= 19, ylim=c(0,9000) )
+abline(v = mean(CAS$Cadmio, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Cadmio, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Cadmio, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+
+```{r, echo=FALSE}
+boxplot(CAS$`Cianuro libre`, horizontal = TRUE, main = "Cianuro Libre", col="cornsilk2", xlab= "Cianuro Libre (mg/m3)",pch= 19, ylim=c(0,5) )
+abline(v = mean(CAS$`Cianuro libre`, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$`Cianuro libre`, na.rm=TRUE, col="red")
+Mediana <-median(CAS$`Cianuro libre`, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+
+```
+
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Cromo, horizontal = TRUE, main = "Cromo", col="cornsilk2", xlab= "Cromo (mg/m3)",pch= 19, ylim=c(0,100) )
+abline(v = mean(CAS$Cromo, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Cromo, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Cromo, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+varia entre 1-1500 mg/kg
+
+```{r,echo=FALSE}
+No_contaminado <- sum(CAS$Cromo > 1 & CAS$Cromo < 1500,na.rm=TRUE)
+Elemento <- c("Cromo")
+COMS <- data.frame(Elemento,No_contaminado)
+COMS
+
+```
+
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Mercurio, horizontal = TRUE, main = "Mercurio", col="cornsilk2", xlab= "Mercurio (mg/m3)",pch= 19, ylim=c(0,7) )
+abline(v = mean(CAS$Mercurio, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Mercurio, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Mercurio, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Plomo, horizontal = TRUE, main = "Plomo", col="cornsilk2", xlab= "Plomo (mg/m3)",pch= 19, ylim=c(0,1000) )
+abline(v = mean(CAS$Plomo, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Plomo, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Plomo, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+varia entre 1-1500 mg/kg
+
+```{r,echo=FALSE}
+No_contaminado <- sum(CAS$Plomo > 1 & CAS$Plomo < 1500,na.rm=TRUE)
+Elemento <- c("Plomo")
+COMS <- data.frame(Elemento,No_contaminado)
+COMS
+
+```
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Zinc, horizontal = TRUE, main = "Zinc", col="cornsilk2", xlab= "Zinc (mg/m3)",pch= 19, ylim=c(0,1000) )
+abline(v = mean(CAS$Zinc, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Zinc, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Zinc, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+varia entre 1-1500 mg/kg
+```{r, echo=FALSE}
+
+No_contaminado <- sum(CAS$Zinc > 1 & CAS$Zinc < 1500,na.rm=TRUE)
+Elemento <- c("Níquel")
+COMS <- data.frame(Elemento,No_contaminado)
+COMS
+```
+
+```{r, echo=FALSE}
+boxplot(CAS$Cobre, horizontal = TRUE, main = "Cobre", col="cornsilk2", xlab= "Cobre (mg/m3)",pch= 19, ylim=c(0,200) )
+abline(v = mean(CAS$Cobre, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Cobre, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Cobre, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ```{r, echo=FALSE}
 boxplot(CAS$Aluminio, horizontal = TRUE, main = "Aluminio", col="cornsilk2", xlab= "Aluminio (mg/m3)",pch= 19, ylim=c(0,45000) )
 abline(v = mean(CAS$Aluminio, na.rm = TRUE, ), col = "red")
-mean(CAS$Aluminio, na.rm=TRUE, col="red")
-median(CAS$Aluminio, na.rm=TRUE)
+Media <- mean(CAS$Aluminio, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Aluminio, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
 ```                               
  
+
+```{r, echo=FALSE}
+boxplot(CAS$Antimonio, horizontal = TRUE, main = "Antimonio", col="cornsilk2", xlab= "Antimonio (mg/m3)",pch= 19, ylim=c(0,9500) )
+abline(v = mean(CAS$Antimonio, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Antimonio, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Antimonio, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+
+
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Berilio, horizontal = TRUE, main = "Berilio", col="cornsilk2", xlab= "Berilio (mg/m3)",pch= 19, ylim=c(0,1500) )
+abline(v = mean(CAS$Berilio, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Berilio, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Berilio, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Bismuto, horizontal = TRUE, main = "Bismuto", col="cornsilk2", xlab= "Bismuto (mg/m3)",pch= 19, ylim=c(0,2800) )
+abline(v = mean(CAS$Bismuto, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Bismuto, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Bismuto, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Boro, horizontal = TRUE, main = "Boro", col="cornsilk2", xlab= "Boro (mg/m3)",pch= 19, ylim=c(0,1100) )
+abline(v = mean(CAS$Boro, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Boro, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Boro, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Calcio, horizontal = TRUE, main = "Calcio", col="cornsilk2", xlab= "Calcio (mg/m3)",pch= 19, ylim=c(0,10500) )
+abline(v = mean(CAS$Calcio, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Calcio, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Calcio, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Cerio, horizontal = TRUE, main = "Cerio", col="cornsilk2", xlab= "Cerio (mg/m3)",pch= 19, ylim=c(0,10300) )
+abline(v = mean(CAS$Cerio, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Cerio, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Cerio, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Cobalto, horizontal = TRUE, main = "Cobalto", col="cornsilk2", xlab= "Cobalto (mg/m3)",pch= 19, ylim=c(0,800) )
+abline(v = mean(CAS$Cobalto, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Cobalto, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Cobalto, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+
+
+
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Estaño, horizontal = TRUE, main = "Estaño", col="cornsilk2", xlab= "Estaño (mg/m3)",pch= 19, ylim=c(0,100) )
+abline(v = mean(CAS$Estaño, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Estaño, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Estaño, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Estroncio, horizontal = TRUE, main = "Estroncio", col="cornsilk2", xlab= "Estroncio (mg/m3)",pch= 19, ylim=c(0,1000) )
+abline(v = mean(CAS$Estroncio, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Estroncio, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Estroncio, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Fósforo, horizontal = TRUE, main = "Fósforo", col="cornsilk2", xlab= "Fósforo (mg/m3)",pch= 19, ylim=c(0,3500) )
+abline(v = mean(CAS$Fósforo, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Fósforo, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Fósforo, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Hierro, horizontal = TRUE, main = "Hierro", col="cornsilk2", xlab= "Hierro (mg/m3)",pch= 19, ylim=c(0,80000) )
+abline(v = mean(CAS$Hierro, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Hierro, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Hierro, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Litio, horizontal = TRUE, main = "Litio", col="cornsilk2", xlab= "Litio (mg/m3)",pch= 19, ylim=c(0,1200) )
+abline(v = mean(CAS$Litio, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Litio, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Litio, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Magnesio, horizontal = TRUE, main = "Magnesio", col="cornsilk2", xlab= "Magnesio (mg/m3)",pch= 19, ylim=c(0,17000) )
+abline(v = mean(CAS$Magnesio, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Magnesio, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Magnesio, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Manganeso, horizontal = TRUE, main = "Manganeso", col="cornsilk2", xlab= "Manganeso (mg/m3)",pch= 19, ylim=c(0,2000) )
+abline(v = mean(CAS$Manganeso, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Manganeso, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Manganeso, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Molibdeno, horizontal = TRUE, main = "Molibdeno", col="cornsilk2", xlab= "Molibdeno (mg/m3)",pch= 19, ylim=c(0,1000) )
+abline(v = mean(CAS$Molibdeno, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Molibdeno, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Molibdeno, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Níquel, horizontal = TRUE, main = "Níquel", col="cornsilk2", xlab= "Níquel (mg/m3)",pch= 19, ylim=c(0,1000) )
+abline(v = mean(CAS$Níquel, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Níquel, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Níquel, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+varia entre 1-1500 mg/kg
+
+```{r,echo=FALSE}
+No_contaminado <- sum(CAS$Níquel > 1 & CAS$Níquel < 1500,na.rm=TRUE)
+Elemento <- c("Níquel")
+COMS <- data.frame(Elemento,No_contaminado)
+COMS
+
+```
+
+
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Plata, horizontal = TRUE, main = "Plata", col="cornsilk2", xlab= "Plata (mg/m3)",pch= 19, ylim=c(0,140) )
+abline(v = mean(CAS$Plata, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Plata, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Plata, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+
+
+
+
+
+
+```{r, echo =FALSE}
+No_contaminado <- sum(CAS$Zinc > 1 & CAS$Zinc < 1500,na.rm=TRUE)
+Elemento <- c("Níquel")
+COMS <- data.frame(Elemento,No_contaminado)
+COMS
+```
+
+
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Potasio, horizontal = TRUE, main = "Potasio", col="cornsilk2", xlab= "Potasio (mg/m3)",pch= 19, ylim=c(0,10000) )
+abline(v = mean(CAS$Potasio, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Potasio, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Potasio, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Selenio, horizontal = TRUE, main = "Selenio", col="cornsilk2", xlab= "Selenio (mg/m3)",pch= 19, ylim=c(0,1000) )
+abline(v = mean(CAS$Selenio, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Selenio, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Selenio, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Sodio, horizontal = TRUE, main = "Sodio", col="cornsilk2", xlab= "Sodio (mg/m3)",pch= 19, ylim=c(0,13000) )
+abline(v = mean(CAS$Sodio, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Sodio, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Sodio, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Talio, horizontal = TRUE, main = "Talio", col="cornsilk2", xlab= "Talio (mg/m3)",pch= 19, ylim=c(0,3000) )
+abline(v = mean(CAS$Talio, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Talio, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Talio, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Titanio, horizontal = TRUE, main = "Titanio", col="cornsilk2", xlab= "Titanio (mg/m3)",pch= 19, ylim=c(0,5000) )
+abline(v = mean(CAS$Titanio, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Titanio, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Titanio, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Torio, horizontal = TRUE, main = "Torio", col="cornsilk2", xlab= "Torio (mg/m3)",pch= 19, ylim=c(0,10000) )
+abline(v = mean(CAS$Torio, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Torio, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Torio, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+```{r, echo=FALSE}
+boxplot(CAS$Uranio, horizontal = TRUE, main = "Uranio", col="cornsilk2", xlab= "Uranio (mg/m3)",pch= 19, ylim=c(0,15000) )
+abline(v = mean(CAS$Uranio, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Uranio, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Uranio, na.rm=TRUE)
+Tab <- data.frame(Media,Mediana)
+Tab
+```
+
+
+
+
+
+
+
 
 
 ### Componetes del suelo
 Las unidades de los componentes se encuentran en mg / kg
 1 ppm = 1 mg / kg
-El cromo, niquel, plomo, zinc varia entre 1-1500 mg/kg
 
-```{r, echo =FALSE}
-
-a <-sum(CAS$Cromo > 1 & CAS$Cromo < 1500, na.rm =TRUE)
-b <- sum(CAS$Níquel > 1 & CAS$Níquel < 1500, na.rm=TRUE)
-c <-sum(CAS$Plomo > 1 & CAS$Plomo < 1500)
-d <- sum(CAS$Zinc > 1 & CAS$Zinc < 1500,na.rm=TRUE)
-e <- c(a,b,c,d)
-f <- c("Cromo","Níquel","Plomo","Zinc")
-COMS <- data.frame(f,e)
-COMS
-```
 
  El Cobalto, Cobre y Arsénico varian entre 0.1 - 250 mg/kg
 ```{r, echo=FALSE}
@@ -238,6 +726,25 @@ COM2
 ```
 
 El níquel, cobalto y arsénico solo presentan algunas de las observaciones dentro del rango.
+
+
+
+```{r}
+plot(CAS$Níquel~CAS$Cobre)
+lm1 <- lm(CAS$Níquel ~ CAS$Cobre)
+plot(lm1)
+
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
