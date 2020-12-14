@@ -146,6 +146,7 @@ ED2
 
 
 ## Cantidad de denuncia por tipo de contaminación en los años 2019-2020
+###La grafica a continuacion brinda información relevante sobre las actividades economicas en el Perú que se ven afectadas por contaminantes ambientales como Bromo, Cromo, Mercurio ,etc.
 
 ```{r,  echo= FALSE}
 tipo <- c("AGUA","SUELO","FAUNA","AIRE","FLORA","POBLACION","EFLUENTES","RESIDUOS SOLIDOS","GASES/HUMO","MATERIAL PARTICULADO`","TALA","RADIACION NO IONIZANTE","FUENTE VISUAL","FUENTE VISUAL")
@@ -182,8 +183,7 @@ barplot(Tabla1920[1:25,2],legend=c("Lima","Ancash","Cusco", "Arequipa","Libertad
 
 ```
 ### Tipo de sector
-
-La mayor cantidad de denuncias es por infraestructura
+###La gráfica a continuacion sirve para generar un idea de las diferentes actividades economicas que se realizan en el Perú.
 ```{r,echo=FALSE}
 #Sector economico 2019-2020
 ACTECO1920 <- c("INFRAESTRUCTURA","INDUSTRIA", "MINERIA","COMERCIO","SANEAMIENTO","AGRICULTURA","HIDROCARBUROS","TRANSPORTE","GANADERIA","PESQUERIA","FORESTAL","CONSTRUCCION","ELECTRICIDAD","TELECOMUNICACIONES","TURISMO" )
