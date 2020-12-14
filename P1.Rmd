@@ -272,13 +272,13 @@ Tab
 ```
 
 
-Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 253.7. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 42.6 . Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
 nivel de significancia del 5%
-ho: u=253.7
-hi u<253.7 o u>253.7
+ho: u=42.6
+hi u<42.6 o u>42.6
 ```{r}
 summary(CAS$Arsénico)
 n=227
@@ -290,7 +290,7 @@ I.Izquierdo<- Media_Muestral-zcritico*Desviacion_Estandar_Muestral/sqrt(n)
 I.Derecho<- Media_Muestral+zcritico*Desviacion_Estandar_Muestral/sqrt(n)
 Precisión <- zcritico*Desviacion_Estandar_Muestral/sqrt(n)
 
-Precisión
+
 ```
 
 ```{r, echo= FALSE}
@@ -355,13 +355,13 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 
-Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 253.7. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 1102.481. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
 nivel de significancia del 5%
-ho: u=253.7
-hi u<253.7 o u>253.7
+ho: u=1102.481
+hi u<1102.481 o u>1102.481
 ```{r}
 summary(CAS$Cadmio)
 n=227
@@ -397,13 +397,13 @@ Tab
 ```
 
 Spolo se econtraron en 14 suelos el componente
-Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 253.7. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 3. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
 nivel de significancia del 5%
-ho: u=253.7
-hi u<253.7 o u>253.7
+ho: u=3
+hi u<3 o u>3
 ```{r}
 summary(CAS$`Cianuro libre`)
 n=227
@@ -437,13 +437,13 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 varia entre 1-1500 mg/kg
-Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 253.7. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a  23.26. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
 nivel de significancia del 5%
-ho: u=253.7
-hi u<253.7 o u>253.7
+ho: u= 23.26
+hi u< 23.26 o u> 23.26
 ```{r}
 summary(CAS$Cromo)
 n=227
@@ -477,13 +477,13 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 
-Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 253.7. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 1.749. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
 nivel de significancia del 5%
-ho: u=253.7
-hi u<253.7 o u>253.7
+ho: u=1.749
+hi u<1.749 o u>1.749
 ```{r}
 summary(CAS$Mercurio)
 n=227
@@ -515,13 +515,13 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 varia entre 1-1500 mg/kg
-Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 253.7. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 197.78. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
 nivel de significancia del 5%
-ho: u=253.7
-hi u<253.7 o u>253.7
+ho: u=197.78
+hi u<197.78 o u>197.78
 ```{r}
 summary(CAS$Plomo)
 n=227
@@ -554,13 +554,13 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 varia entre 1-1500 mg/kg
-Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 253.7. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 277. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
 nivel de significancia del 5%
-ho: u=253.7
-hi u<253.7 o u>253.7
+ho: u=277
+hi u<277 o u>277
 ```{r}
 summary(CAS$Zinc)
 n=227
@@ -592,13 +592,13 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 
-Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 253.7. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 23.26. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
 nivel de significancia del 5%
-ho: u=253.7
-hi u<253.7 o u>253.7
+ho: u=23.26
+hi u<23.26 o u>23.26
 ```{r}
 summary(CAS$Cromo)
 n=227
