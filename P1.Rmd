@@ -204,6 +204,8 @@ barplot(tabla1920[1:20,2], legend= c("INFRAESTRUCTURA","INDUSTRIA", "MINERIA","C
 
 ## Diagrama de caja de variable - data: Componentes ambientales del suelo-EAT
 
+###A continuación, se han determinado los intervalos confianza y se han determinado el número suelos contaminados con el fin de comprobar si existe una relacion entre ambos.
+
 ### Relavantes:
 ```{r, echo=FALSE}
 boxplot(CAS$Arsénico, horizontal = TRUE, main = "Arsénico", col="cornsilk2", xlab= "Arsénico (mg/m3)",pch= 19, ylim=c(0,400) )
@@ -286,7 +288,7 @@ IDC
 
 
 
-
+###Cadmio
 
 ```{r, echo=FALSE}
 boxplot(CAS$Cadmio, horizontal = TRUE, main = "Cadmio", col="cornsilk2", xlab= "Cadmio (mg/m3)",pch= 19, ylim=c(0,9000) )
@@ -327,7 +329,7 @@ IDC
 
 
 
-
+###Ciauro libre
 ```{r, echo=FALSE}
 boxplot(CAS$`Cianuro libre`, horizontal = TRUE, main = "Cianuro Libre", col="cornsilk2", xlab= "Cianuro Libre (mg/m3)",pch= 19, ylim=c(0,5) )
 abline(v = mean(CAS$`Cianuro libre`, na.rm = TRUE, ), col = "red")
@@ -369,7 +371,7 @@ IDC
 
 
 
-
+###Cromo
 ```{r, echo=FALSE}
 boxplot(CAS$Cromo, horizontal = TRUE, main = "Cromo", col="cornsilk2", xlab= "Cromo (mg/m3)",pch= 19, ylim=c(0,100) )
 abline(v = mean(CAS$Cromo, na.rm = TRUE, ), col = "red")
@@ -409,7 +411,7 @@ IDC
 
 
 
-
+###Mercurio
 ```{r, echo=FALSE}
 boxplot(CAS$Mercurio, horizontal = TRUE, main = "Mercurio", col="cornsilk2", xlab= "Mercurio (mg/m3)",pch= 19, ylim=c(0,7) )
 abline(v = mean(CAS$Mercurio, na.rm = TRUE, ), col = "red")
@@ -447,7 +449,7 @@ IDC <- data.frame(Desviacion_Estandar_Muestral,Media_Muestral,Zcritico,I.Izquier
 IDC
 ```
 
-
+###Plomo
 ```{r, echo=FALSE}
 boxplot(CAS$Plomo, horizontal = TRUE, main = "Plomo", col="cornsilk2", xlab= "Plomo (mg/m3)",pch= 19, ylim=c(0,1000) )
 abline(v = mean(CAS$Plomo, na.rm = TRUE, ), col = "red")
@@ -485,7 +487,7 @@ IDC <- data.frame(Desviacion_Estandar_Muestral,Media_Muestral,Zcritico,I.Izquier
 IDC
 ```
 
-
+###Zinc
 
 ```{r, echo=FALSE}
 boxplot(CAS$Zinc, horizontal = TRUE, main = "Zinc", col="cornsilk2", xlab= "Zinc (mg/m3)",pch= 19, ylim=c(0,1000) )
@@ -524,7 +526,7 @@ IDC <- data.frame(Desviacion_Estandar_Muestral,Media_Muestral,Zcritico,I.Izquier
 IDC
 ```
 
-
+###Cobre
 ```{r, echo=FALSE}
 boxplot(CAS$Cobre, horizontal = TRUE, main = "Cobre", col="cornsilk2", xlab= "Cobre (mg/m3)",pch= 19, ylim=c(0,200) )
 abline(v = mean(CAS$Cobre, na.rm = TRUE, ), col = "red")
@@ -535,7 +537,7 @@ Elemento <- c("Cobre")
 Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
-
+###Cromo
 Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 23.26. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
@@ -564,11 +566,11 @@ IDC
 
 
 
+###OTROS CONTAMINANTES
 
+###Las gráficas a continuacion, muestran la dispersion que existe en los diferentes contaminantes del suelo. Esto se realiza con el fin de determinar valores atipicos .
 
-### Otros:
-
-
+###Aluminio
 ```{r, echo=FALSE}
 boxplot(CAS$Aluminio, horizontal = TRUE, main = "Aluminio", col="cornsilk2", xlab= "Aluminio (mg/m3)",pch= 19, ylim=c(0,45000) )
 abline(v = mean(CAS$Aluminio, na.rm = TRUE, ), col = "red")
@@ -578,7 +580,7 @@ Tab <- data.frame(Media,Mediana)
 Tab
 ```                               
  
-
+###Antimonio
 ```{r, echo=FALSE}
 boxplot(CAS$Antimonio, horizontal = TRUE, main = "Antimonio", col="cornsilk2", xlab= "Antimonio (mg/m3)",pch= 19, ylim=c(0,9500) )
 abline(v = mean(CAS$Antimonio, na.rm = TRUE, ), col = "red")
@@ -589,7 +591,7 @@ Tab
 ```
 
 
-
+###Berilio
 ```{r, echo=FALSE}
 boxplot(CAS$Berilio, horizontal = TRUE, main = "Berilio", col="cornsilk2", xlab= "Berilio (mg/m3)",pch= 19, ylim=c(0,1500) )
 abline(v = mean(CAS$Berilio, na.rm = TRUE, ), col = "red")
@@ -599,7 +601,7 @@ Tab <- data.frame(Media,Mediana)
 Tab
 ```
 
-
+###Bismuto
 ```{r, echo=FALSE}
 boxplot(CAS$Bismuto, horizontal = TRUE, main = "Bismuto", col="cornsilk2", xlab= "Bismuto (mg/m3)",pch= 19, ylim=c(0,2800) )
 abline(v = mean(CAS$Bismuto, na.rm = TRUE, ), col = "red")
@@ -609,7 +611,7 @@ Tab <- data.frame(Media,Mediana)
 Tab
 ```
 
-
+###Boro
 ```{r, echo=FALSE}
 boxplot(CAS$Boro, horizontal = TRUE, main = "Boro", col="cornsilk2", xlab= "Boro (mg/m3)",pch= 19, ylim=c(0,1100) )
 abline(v = mean(CAS$Boro, na.rm = TRUE, ), col = "red")
@@ -621,7 +623,7 @@ Tab
 
 
 
-
+###Calcio
 ```{r, echo=FALSE}
 boxplot(CAS$Calcio, horizontal = TRUE, main = "Calcio", col="cornsilk2", xlab= "Calcio (mg/m3)",pch= 19, ylim=c(0,10500) )
 abline(v = mean(CAS$Calcio, na.rm = TRUE, ), col = "red")
@@ -631,7 +633,7 @@ Tab <- data.frame(Media,Mediana)
 Tab
 ```
 
-
+###Cerio
 ```{r, echo=FALSE}
 boxplot(CAS$Cerio, horizontal = TRUE, main = "Cerio", col="cornsilk2", xlab= "Cerio (mg/m3)",pch= 19, ylim=c(0,10300) )
 abline(v = mean(CAS$Cerio, na.rm = TRUE, ), col = "red")
@@ -642,7 +644,7 @@ Tab
 ```
 
 
-
+###Cobalto
 ```{r, echo=FALSE}
 boxplot(CAS$Cobalto, horizontal = TRUE, main = "Cobalto", col="cornsilk2", xlab= "Cobalto (mg/m3)",pch= 19, ylim=c(0,800) )
 abline(v = mean(CAS$Cobalto, na.rm = TRUE, ), col = "red")
@@ -653,7 +655,7 @@ Tab
 ```
 
 
-
+###Estaño
 ```{r, echo=FALSE}
 boxplot(CAS$Estaño, horizontal = TRUE, main = "Estaño", col="cornsilk2", xlab= "Estaño (mg/m3)",pch= 19, ylim=c(0,100) )
 abline(v = mean(CAS$Estaño, na.rm = TRUE, ), col = "red")
@@ -663,7 +665,7 @@ Tab <- data.frame(Media,Mediana)
 Tab
 ```
 
-
+###Estroncio
 ```{r, echo=FALSE}
 boxplot(CAS$Estroncio, horizontal = TRUE, main = "Estroncio", col="cornsilk2", xlab= "Estroncio (mg/m3)",pch= 19, ylim=c(0,1000) )
 abline(v = mean(CAS$Estroncio, na.rm = TRUE, ), col = "red")
@@ -674,7 +676,7 @@ Tab
 ```
 
 
-
+###Fósforo
 ```{r, echo=FALSE}
 boxplot(CAS$Fósforo, horizontal = TRUE, main = "Fósforo", col="cornsilk2", xlab= "Fósforo (mg/m3)",pch= 19, ylim=c(0,3500) )
 abline(v = mean(CAS$Fósforo, na.rm = TRUE, ), col = "red")
@@ -685,7 +687,7 @@ Tab
 ```
 
 
-
+###Hierro
 ```{r, echo=FALSE}
 boxplot(CAS$Hierro, horizontal = TRUE, main = "Hierro", col="cornsilk2", xlab= "Hierro (mg/m3)",pch= 19, ylim=c(0,80000) )
 abline(v = mean(CAS$Hierro, na.rm = TRUE, ), col = "red")
@@ -695,7 +697,7 @@ Tab <- data.frame(Media,Mediana)
 Tab
 ```
 
-
+###Litio
 
 ```{r, echo=FALSE}
 boxplot(CAS$Litio, horizontal = TRUE, main = "Litio", col="cornsilk2", xlab= "Litio (mg/m3)",pch= 19, ylim=c(0,1200) )
@@ -706,7 +708,7 @@ Tab <- data.frame(Media,Mediana)
 Tab
 ```
 
-
+###Magnesio
 ```{r, echo=FALSE}
 boxplot(CAS$Magnesio, horizontal = TRUE, main = "Magnesio", col="cornsilk2", xlab= "Magnesio (mg/m3)",pch= 19, ylim=c(0,17000) )
 abline(v = mean(CAS$Magnesio, na.rm = TRUE, ), col = "red")
@@ -717,7 +719,7 @@ Tab
 ```
 
 
-
+###Manganeso
 ```{r, echo=FALSE}
 boxplot(CAS$Manganeso, horizontal = TRUE, main = "Manganeso", col="cornsilk2", xlab= "Manganeso (mg/m3)",pch= 19, ylim=c(0,2000) )
 abline(v = mean(CAS$Manganeso, na.rm = TRUE, ), col = "red")
@@ -729,7 +731,7 @@ Tab
 
 
 
-
+###Molibdeno
 ```{r, echo=FALSE}
 boxplot(CAS$Molibdeno, horizontal = TRUE, main = "Molibdeno", col="cornsilk2", xlab= "Molibdeno (mg/m3)",pch= 19, ylim=c(0,1000) )
 abline(v = mean(CAS$Molibdeno, na.rm = TRUE, ), col = "red")
@@ -738,7 +740,7 @@ Mediana <-median(CAS$Molibdeno, na.rm=TRUE)
 Tab <- data.frame(Media,Mediana)
 Tab
 ```
-
+###Niquel
 
 ```{r, echo=FALSE}
 boxplot(CAS$Níquel, horizontal = TRUE, main = "Níquel", col="cornsilk2", xlab= "Níquel (mg/m3)",pch= 19, ylim=c(0,1000) )
@@ -748,7 +750,7 @@ Mediana <-median(CAS$Níquel, na.rm=TRUE)
 Tab <- data.frame(Media,Mediana)
 Tab
 ```
-varia entre 1-1500 mg/kg
+### Varia entre 1-1500 mg/kg
 
 ```{r,echo=FALSE}
 No_contaminado <- sum(CAS$Níquel > 1 & CAS$Níquel < 1500,na.rm=TRUE)
@@ -760,7 +762,7 @@ COMS
 
 
 
-
+###Plata
 ```{r, echo=FALSE}
 boxplot(CAS$Plata, horizontal = TRUE, main = "Plata", col="cornsilk2", xlab= "Plata (mg/m3)",pch= 19, ylim=c(0,140) )
 abline(v = mean(CAS$Plata, na.rm = TRUE, ), col = "red")
@@ -770,7 +772,7 @@ Tab <- data.frame(Media,Mediana)
 Tab
 ```
 
-
+###Potasio
 ```{r, echo=FALSE}
 boxplot(CAS$Potasio, horizontal = TRUE, main = "Potasio", col="cornsilk2", xlab= "Potasio (mg/m3)",pch= 19, ylim=c(0,10000) )
 abline(v = mean(CAS$Potasio, na.rm = TRUE, ), col = "red")
@@ -780,7 +782,7 @@ Tab <- data.frame(Media,Mediana)
 Tab
 ```
 
-
+###Selenio
 ```{r, echo=FALSE}
 boxplot(CAS$Selenio, horizontal = TRUE, main = "Selenio", col="cornsilk2", xlab= "Selenio (mg/m3)",pch= 19, ylim=c(0,1000) )
 abline(v = mean(CAS$Selenio, na.rm = TRUE, ), col = "red")
@@ -790,7 +792,7 @@ Tab <- data.frame(Media,Mediana)
 Tab
 ```
 
-
+###Sodio
 ```{r, echo=FALSE}
 boxplot(CAS$Sodio, horizontal = TRUE, main = "Sodio", col="cornsilk2", xlab= "Sodio (mg/m3)",pch= 19, ylim=c(0,13000) )
 abline(v = mean(CAS$Sodio, na.rm = TRUE, ), col = "red")
@@ -800,7 +802,7 @@ Tab <- data.frame(Media,Mediana)
 Tab
 ```
 
-
+###Talio
 ```{r, echo=FALSE}
 boxplot(CAS$Talio, horizontal = TRUE, main = "Talio", col="cornsilk2", xlab= "Talio (mg/m3)",pch= 19, ylim=c(0,3000) )
 abline(v = mean(CAS$Talio, na.rm = TRUE, ), col = "red")
@@ -812,7 +814,7 @@ Tab
 
 
 
-
+###Titanio
 ```{r, echo=FALSE}
 boxplot(CAS$Titanio, horizontal = TRUE, main = "Titanio", col="cornsilk2", xlab= "Titanio (mg/m3)",pch= 19, ylim=c(0,5000) )
 abline(v = mean(CAS$Titanio, na.rm = TRUE, ), col = "red")
@@ -823,7 +825,7 @@ Tab
 ```
 
 
-
+###Torio
 ```{r, echo=FALSE}
 boxplot(CAS$Torio, horizontal = TRUE, main = "Torio", col="cornsilk2", xlab= "Torio (mg/m3)",pch= 19, ylim=c(0,10000) )
 abline(v = mean(CAS$Torio, na.rm = TRUE, ), col = "red")
@@ -833,7 +835,7 @@ Tab <- data.frame(Media,Mediana)
 Tab
 ```
 
-
+###Uranio
 ```{r, echo=FALSE}
 boxplot(CAS$Uranio, horizontal = TRUE, main = "Uranio", col="cornsilk2", xlab= "Uranio (mg/m3)",pch= 19, ylim=c(0,15000) )
 abline(v = mean(CAS$Uranio, na.rm = TRUE, ), col = "red")
