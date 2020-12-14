@@ -217,18 +217,18 @@ Tab
 ```
 
 
-Una muestra de 227 con un intervalo de confianza del 25%. Mi hipotesis nula es de que la media es igual a 42.6 . Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 42.6 . Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
-intercalo de confianza del 25%
-nivel de significancia del 75%
+intercalo de confianza del 95%
+nivel de significancia del 5%
 ho: u=42.6
 hi u<42.6 o u>42.6
 ```{r}
 summary(CAS$Arsénico)
 n=227
-ns<- (1-0.25)/2
-Zcritico <- qnorm(0.25+ns)
+ns<- (1-0.95)/2
+Zcritico <- qnorm(0.95+ns)
 Desviacion_Estandar_Muestral <- sd(CAS$Arsénico, na.rm=TRUE)
 Media_Muestral <- mean(CAS$Arsénico, na.rm=TRUE)
 I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
@@ -266,8 +266,8 @@ hi u<253.7 o u>253.7
 ```{r}
 summary(CAS$Bario)
 n=227
-ns<- (1-0.95)/2
-Zcritico <- qnorm(0.95+ns)
+ns<- (1-0.75)/2
+Zcritico <- qnorm(0.75+ns)
 Desviacion_Estandar_Muestral <- sd(CAS$Bario, na.rm=TRUE)
 Media_Muestral <- mean(CAS$Bario, na.rm=TRUE)
 I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
@@ -302,8 +302,8 @@ Tab
 Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 1102.481. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
-intercalo de confianza del 95%
-nivel de significancia del 5%
+intercalo de confianza del 5%
+nivel de significancia del 95%
 ho: u=1102.481
 hi u<1102.481 o u>1102.481
 ```{r}
@@ -459,18 +459,18 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 varia entre 1-1500 mg/kg
-Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 197.78. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 75%. Mi hipotesis nula es de que la media es igual a 197.78. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
-intercalo de confianza del 95%
-nivel de significancia del 5%
+intercalo de confianza del 75%
+nivel de significancia del 25%
 ho: u=197.78
 hi u<197.78 o u>197.78
 ```{r}
 summary(CAS$Plomo)
 n=227
-ns<- (1-0.95)/2
-Zcritico <- qnorm(0.95+ns)
+ns<- (1-0.75)/2
+Zcritico <- qnorm(0.75+ns)
 Desviacion_Estandar_Muestral <- sd(CAS$Plomo, na.rm=TRUE)
 Media_Muestral <- mean(CAS$Plomo, na.rm=TRUE)
 I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
@@ -498,18 +498,18 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 varia entre 1-1500 mg/kg
-Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 277. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 75%. Mi hipotesis nula es de que la media es igual a 277. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
-intercalo de confianza del 95%
-nivel de significancia del 5%
+intercalo de confianza del 75%
+nivel de significancia del 25%
 ho: u=277
 hi u<277 o u>277
 ```{r}
 summary(CAS$Zinc)
 n=227
-ns<- (1-0.95)/2
-Zcritico <- qnorm(0.95+ns)
+ns<- (1-0.75)/2
+Zcritico <- qnorm(0.75+ns)
 Desviacion_Estandar_Muestral <- sd(CAS$Zinc, na.rm=TRUE)
 Media_Muestral <- mean(CAS$Zinc, na.rm=TRUE)
 I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
