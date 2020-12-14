@@ -12,7 +12,7 @@ library(dplyr)
 ```
 
 ```{r, echo = FALSE}
-DD1920 <- read_csv("Denuncias1920.csv")
+DD1920 <- read_csv("Denuncias1920.csv",col_types=cols(Suelo = col_number()))
 DD18 <- read_csv("Denuncias-18.csv")
 CAS <- read_csv("CAS.csv", col_types = cols(Aluminio = col_number(), 
     Antimonio = col_number(), `Arsénico` = col_number(), 
@@ -53,7 +53,9 @@ CAA <- read_csv("CAA.csv", col_types = cols(Aluminio = col_number(),
 ```
 
 
-# Análisis de la relación entre las denuncias y la contaminación en los últimos 3 años
+
+# Determinar la relacion entre los posibles contaminantes ambientales y el suelo 
+
 
 ## Integrantes:
 David León, Harold Canto Vidal, Marcelo Surco Salas, Gonzalo Suárez
@@ -164,40 +166,6 @@ La mayor cantidad de denuncias son por la contaminación de suelos, seguidos de 
 
 ## Denuncias en los departamentetos
 
-### En el 2018
-
-La mayor cantidad de denuncias son en el departamento de Lima
-```{r, echo=FALSE}
-#DEnuncias 2018
-
-DEP18 <- c("Lima","Ancash","Cusco", "Arequipa","Libertad", "Junin","Ica","Piura","Callao","Lambayeque","Apurimac","Ucayali","Cajamarca","Ayacucho","Loreto" ,"Moquegua","Tumbes","Pasco","Tacna","San Martin","Huanuco","Puno","Amazonas","Huancavelica","Madre de Dios")
-
-CAN18 <- c(sum(DD18$DEPARTAMENTO == "LIMA"),sum(DD18$DEPARTAMENTO == "ANCASH"),sum(DD18$DEPARTAMENTO == "CUSCO"),sum(DD18$DEPARTAMENTO == "AREQUIPA"),sum(DD18$DEPARTAMENTO == "LA LIBERTAD"),sum(DD18$DEPARTAMENTO == "JUNIN"),sum(DD18$DEPARTAMENTO == "ICA"),sum(DD18$DEPARTAMENTO == "PIURA"),sum(DD18$DEPARTAMENTO == "CALLAO"),sum(DD18$DEPARTAMENTO == "LAMBAYEQUE"),sum(DD18$DEPARTAMENTO == "APURIMAC"),sum(DD18$DEPARTAMENTO == "UCAYALI"),sum(DD18$DEPARTAMENTO == "CAJAMARCA"),sum(DD18$DEPARTAMENTO == "AYACUCHO"),sum(DD18$DEPARTAMENTO == "LORETO"),sum(DD18$DEPARTAMENTO == "MOQUEGUA"),sum(DD18$DEPARTAMENTO == "TUMBES"),sum(DD18$DEPARTAMENTO == "PASCO"),sum(DD18$DEPARTAMENTO == "TACNA"),sum(DD18$DEPARTAMENTO == "SAN MARTIN"),sum(DD18$DEPARTAMENTO == "HUANUCO"),sum(DD18$DEPARTAMENTO == "PUNO"),sum(DD18$DEPARTAMENTO == "AMAZONAS"),sum(DD18$DEPARTAMENTO == "HUANCAVELICA"),sum(DD18$DEPARTAMENTO == "MADRE DE DIOS"))
-
-Tabla18 <- data.frame(DEP18,CAN18)
-
-barplot(Tabla18[1:25,2],legend=c("Lima","Ancash","Cusco", "Arequipa","Libertad", "Junin","Ica","Piura","Callao","Lambayeque","Apurimac","Ucayali","Cajamarca","Ayacucho","Loreto" ,"Moquegua","Tumbes","Pasco","Tacna","San Martin","Huanuco","Puno","Amazonas","Huancavelica","Madre de Dios"), col=colores,xlab= "Departamentos", ylab="Denuncias 2018")
-
-
-```
-
-
-## Tipo de sector
-
-Las denuncias por tipo de sector de mayor cantidad son infraestructura , industria , minería y comercio.
-```{r, echo=FALSE}
-#Sector economico 2018
-ACTECO18 <- c("INFRAESTRUCTURA","INDUSTRIA", "MINERIA","COMERCIO","SANEAMIENTO","AGRICULTURA","HIDROCARBUROS","TRANSPORTE","GANADERIA","PESQUERIA","FORESTAL","CONSTRUCCION","ELECTRICIDAD","TELECOMUNICACIONES","TURISMO" )
-
-CAN18 <- c(sum(DD18$SECTOR == "INFRAESTRUCTURA"),sum(DD18$SECTOR == "INDUSTRIA"),sum(DD18$SECTOR == "MINERIA"),sum(DD18$SECTOR== "COMERCIO"),sum(DD18$SECTOR == "SANEAMIENTO"),sum(DD18$SECTOR == "AGRICULTURA"),sum(DD18$SECTOR== "HIDROCARBUROS"),sum(DD18$SECTOR == "TRANSPORTE"),sum(DD18$SECTOR == "GANADERIA"),sum(DD18$SECTOR == "PESQUERIA"),sum(DD18$SECTOR== "FORESTAL"),sum(DD18$SECTOR == "CONSTRUCCION"),sum(DD18$SECTOR == "ELECTRICIDAD"),sum(DD18$SECTOR == "TELECOMUNICACIONES"),sum(DD18$SECTOR == "TURISMO"))
-
-tabla18 <- data.frame(ACTECO18,CAN18)
-
-barplot(tabla18[1:20,2], legend= c("INFRAESTRUCTURA","INDUSTRIA", "MINERIA","COMERCIO","SANEAMIENTO","AGRICULTURA","HIDROCARBUROS","TRANSPORTE","GANADERIA","PESQUERIA","FORESTAL","CONSTRUCCION","ELECTRICIDAD","TELECOMUNICACIONES","TURISMO" ), col=colores, xlab ="Sector",ylab="Denuncias 2018")
-```
-
-
-
 ### En el 2019-2020
 
 En el 2019 y 2020 Lima presenta mayor cantidad de denuncias.
@@ -229,32 +197,9 @@ barplot(tabla1920[1:20,2], legend= c("INFRAESTRUCTURA","INDUSTRIA", "MINERIA","C
 
 
 
-### Diagrama de denuncias cerradas y pendientes en el año 2018
-```{r, echo=FALSE}
-estado <- c("Cerrado", "En Seguimiento", "Archivada")
-
-cantidad_d <- c(sum(DD18$ESTADO == "CERRADA"),sum(DD18$ESTADO == "EN SEGUIMIENTO"),sum(DD18$ESTADO=="ARCHIVDA "))
-
-color <- c("green", "red")
-
-DDS<-data.frame(estado, cantidad_d)
-
-barplot(DDS[1:3,2], legend = c("CERRADO", "EN SEGUIMIENTO","ARCHIVADA"), col = color, xlab = "Estado de la denuncia", ylab = "Cantidad")
-```
 
 
-## Diagrama de denuncias cerradas y pendientes en el año 2019-2018
-```{r, echo=FALSE}
-estado_19 <- c("Cerrado", "En Seguimiento","Archivado")
 
-cantidad_d_19 <- c(sum(DD1920$ESTADO == "CERRADA"),sum(DD1920$ESTADO == "EN SEGUIMIENTO"),sum(DD1920$ESTADO == "ARCHIVADA"))
-
-color <- c("green", "red")
-
-DDS_19<-data.frame(estado_19, cantidad_d_19)
-
-barplot(DDS_19[1:3,2], legend = c("CERRADO", "EN SEGUIMIENTO", "ARCHIVADA"), col = color, xlab = "Estado de la denuncia", ylab = "Cantidad")
-```
 
 
 ## Diagrama de caja de variable - data: Componentes ambientales del suelo-EAT
@@ -272,23 +217,23 @@ Tab
 ```
 
 
-Una muestra de 227 con un intervalo de confianza del 95%. Mi hipotesis nula es de que la media es igual a 42.6 . Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 25%. Mi hipotesis nula es de que la media es igual a 42.6 . Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
-intercalo de confianza del 95%
-nivel de significancia del 5%
+intercalo de confianza del 25%
+nivel de significancia del 75%
 ho: u=42.6
 hi u<42.6 o u>42.6
 ```{r}
 summary(CAS$Arsénico)
 n=227
-ns<- (1-0.95)/2
-Zcritico <- qnorm(0.95+ns)
+ns<- (1-0.25)/2
+Zcritico <- qnorm(0.25+ns)
 Desviacion_Estandar_Muestral <- sd(CAS$Arsénico, na.rm=TRUE)
 Media_Muestral <- mean(CAS$Arsénico, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
 
 
 ```
@@ -325,21 +270,20 @@ ns<- (1-0.95)/2
 Zcritico <- qnorm(0.95+ns)
 Desviacion_Estandar_Muestral <- sd(CAS$Bario, na.rm=TRUE)
 Media_Muestral <- mean(CAS$Bario, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
 ```
 
 ```{r, echo= FALSE}
-IDC <- data.frame(Desviacion_Estandar_Muestral,Media_Muestral,Zcritico,I.Izquierdo,I.Derecho,precision)
+IDC <- data.frame(Desviacion_Estandar_Muestral,Media_Muestral,Zcritico,I.Izquierdo,I.Derecho,Precisión)
 IDC
 ```
 
 
-Si quisiera una precision de 2% necesito una muestra de 590306786.
-```{r}
-(zcritico*o/0.02)^2
-```
+
+
+
 
 
 
@@ -365,13 +309,13 @@ hi u<1102.481 o u>1102.481
 ```{r}
 summary(CAS$Cadmio)
 n=227
-ns<- (1-0.95)/2
-Zcritico <- qnorm(0.95+ns)
+ns<- (1-0.05)/2
+Zcritico <- qnorm(0.05+ns)
 Desviacion_Estandar_Muestral <- sd(CAS$Cadmio, na.rm=TRUE)
 Media_Muestral <- mean(CAS$Cadmio, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
 
 
 ```
@@ -411,9 +355,9 @@ ns<- (1-0.95)/2
 Zcritico <- qnorm(0.95+ns)
 Desviacion_Estandar_Muestral <- sd(CAS$`Cianuro libre`, na.rm=TRUE)
 Media_Muestral <- mean(CAS$`Cianuro libre`, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
 
 
 ```
@@ -451,9 +395,9 @@ ns<- (1-0.95)/2
 Zcritico <- qnorm(0.95+ns)
 Desviacion_Estandar_Muestral <- sd(CAS$Cromo, na.rm=TRUE)
 Media_Muestral <- mean(CAS$Cromo, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
 
 
 ```
@@ -491,9 +435,9 @@ ns<- (1-0.95)/2
 Zcritico <- qnorm(0.95+ns)
 Desviacion_Estandar_Muestral <- sd(CAS$Mercurio, na.rm=TRUE)
 Media_Muestral <- mean(CAS$Mercurio, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
 
 
 ```
@@ -529,9 +473,9 @@ ns<- (1-0.95)/2
 Zcritico <- qnorm(0.95+ns)
 Desviacion_Estandar_Muestral <- sd(CAS$Plomo, na.rm=TRUE)
 Media_Muestral <- mean(CAS$Plomo, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
 
 
 ```
@@ -568,9 +512,9 @@ ns<- (1-0.95)/2
 Zcritico <- qnorm(0.95+ns)
 Desviacion_Estandar_Muestral <- sd(CAS$Zinc, na.rm=TRUE)
 Media_Muestral <- mean(CAS$Zinc, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
 
 
 ```
@@ -606,9 +550,9 @@ ns<- (1-0.95)/2
 Zcritico <- qnorm(0.95+ns)
 Desviacion_Estandar_Muestral <- sd(CAS$Cromo, na.rm=TRUE)
 Media_Muestral <- mean(CAS$Cromo, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
 
 
 ```
@@ -900,33 +844,6 @@ Tab
 ```
 
 
-
-
-
-
-n=227
-intercalo de confianza del 95%
-nivel de significancia del 5%
-ho: u=151.0
-hi u<151.0 o u>151.0
-```{r}
-summary(CAS$Bario)
-n=227
-ns<- (1-0.95)/2
-zcritico <- qnorm(0.95+ns)
-o <- sd(CAS$Bario, na.rm=TRUE)
-x <- mean(CAS$Bario, na.rm=TRUE)
-```
-
-```{r}
-x-zcritico*o/sqrt(n)
-x+zcritico*o/sqrt(n)
-```
-
-precision de 2% necesito una muestra de 590306786
-```{r}
-(zcritico*o/0.02)^2
-```
 
 
 
