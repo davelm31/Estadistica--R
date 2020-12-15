@@ -146,7 +146,6 @@ ED2
 
 
 ## Cantidad de denuncia por tipo de contaminación en los años 2019-2020
-###La grafica a continuacion brinda información relevante sobre las actividades economicas en el Perú que se ven afectadas por contaminantes ambientales como Bromo, Cromo, Mercurio ,etc.
 
 ```{r,  echo= FALSE}
 tipo <- c("AGUA","SUELO","FAUNA","AIRE","FLORA","POBLACION","EFLUENTES","RESIDUOS SOLIDOS","GASES/HUMO","MATERIAL PARTICULADO`","TALA","RADIACION NO IONIZANTE","FUENTE VISUAL","FUENTE VISUAL")
@@ -182,23 +181,6 @@ Tabla1920 <- data.frame(DEP1920,CAN1920)
 barplot(Tabla1920[1:25,2],legend=c("Lima","Ancash","Cusco", "Arequipa","Libertad", "Junin","Ica","Piura","Callao","Lambayeque","Apurimac","Ucayali","Cajamarca","Ayacucho","Loreto" ,"Moquegua","Tumbes","Pasco","Tacna","San Martin","Huanuco","Puno","Amazonas","Huancavelica","Madre de Dios"),col = colores, xlab="Departamento",ylab="Denuncias 2019-2020")
 
 ```
-### Tipo de sector
-###La gráfica a continuacion sirve para generar un idea de las diferentes actividades economicas que se realizan en el Perú.
-```{r,echo=FALSE}
-#Sector economico 2019-2020
-ACTECO1920 <- c("INFRAESTRUCTURA","INDUSTRIA", "MINERIA","COMERCIO","SANEAMIENTO","AGRICULTURA","HIDROCARBUROS","TRANSPORTE","GANADERIA","PESQUERIA","FORESTAL","CONSTRUCCION","ELECTRICIDAD","TELECOMUNICACIONES","TURISMO" )
-
-CAN1920 <- c(sum(DD1920$`ACTIVIDAD ECONOMICA` == "INFRAESTRUCTURA"),sum(DD1920$`ACTIVIDAD ECONOMICA` == "INDUSTRIA"),sum(DD1920$`ACTIVIDAD ECONOMICA` == "MINERIA"),sum(DD1920$`ACTIVIDAD ECONOMICA`== "COMERCIO"),sum(DD1920$`ACTIVIDAD ECONOMICA` == "SANEAMIENTO"),sum(DD1920$`ACTIVIDAD ECONOMICA` == "AGRICULTURA"),sum(DD1920$`ACTIVIDAD ECONOMICA`== "HIDROCARBUROS"),sum(DD1920$`ACTIVIDAD ECONOMICA` == "TRANSPORTE"),sum(DD1920$`ACTIVIDAD ECONOMICA` == "GANADERIA"),sum(DD1920$`ACTIVIDAD ECONOMICA` == "PESQUERIA"),sum(DD1920$`ACTIVIDAD ECONOMICA`== "FORESTAL"),sum(DD1920$`ACTIVIDAD ECONOMICA` == "CONSTRUCCION"),sum(DD1920$`ACTIVIDAD ECONOMICA` == "ELECTRICIDAD"),sum(DD1920$`ACTIVIDAD ECONOMICA` == "TELECOMUNICACIONES"),sum(DD1920$`ACTIVIDAD ECONOMICA` == "TURISMO"))
-
-tabla1920 <- data.frame(ACTECO1920,CAN1920)
-
-barplot(tabla1920[1:20,2], legend= c("INFRAESTRUCTURA","INDUSTRIA", "MINERIA","COMERCIO","SANEAMIENTO","AGRICULTURA","HIDROCARBUROS","TRANSPORTE","GANADERIA","PESQUERIA","FORESTAL","CONSTRUCCION","ELECTRICIDAD","TELECOMUNICACIONES","TURISMO" ), col= colores,xlab="Sector", ylab="Denuncia 2019-2020")
-```
-
-
-
-
-
 
 
 
@@ -844,6 +826,59 @@ Mediana <-median(CAS$Uranio, na.rm=TRUE)
 Tab <- data.frame(Media,Mediana)
 Tab
 ```
+
+
+
+
+
+
+
+
+```{r}
+l1<- lm(CAS$Mercurio~CAS$Plomo)
+plot(l1)
+summary(CAS$Plomo)
+Correlacion<- cor(CAS$Mercurio,CAS$Plomo)
+Tabla <- data.frame(Correlacion)
+Tabla
+```
+
+
+
+```{r}
+l1 <- lm(CAS$Mercurio~CAS$Bario)
+cor(CAS$Mercurio,CAS$Bario)
+plot(l1)
+```
+
+
+
+```{r}
+l1 <- lm(CAS$Mercurio~CAS$Cadmio)
+cor(CAS$Mercurio,CAS$Cadmio)
+plot(l1)
+plot(CAS$Mercurio~CAS$Cadmio)
+summary(CAS$Cadmio)
+summary(CAS$Mercurio)
+```
+
+
+
+```{r}
+cor(CAS$Arsénico,CAS$Bario, use="complete.obs")
+cor(CAS$Arsénico,CAS$Cadmio, use="complete.obs")
+cor(CAS$Arsénico,CAS$Cromo, use="complete.obs")
+cor(CAS$Arsénico,CAS$Mercurio, use="complete.obs")
+cor(CAS$Arsénico,CAS$Plomo, use="complete.obs")
+cor(CAS$Arsénico,CAS$`Cianuro libre`, use="complete.obs")
+cor(CAS$Arsénico,CAS$Cobre, use="complete.obs")
+cor(CAS$Arsénico,CAS$Cobalto, use="complete.obs")
+
+```
+
+
+
+
 
 
 
