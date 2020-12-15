@@ -64,7 +64,7 @@ David León, Harold Canto Vidal, Marcelo Surco Salas, Gonzalo Suárez
 Hoy en día Lima es una de las ciudades considerada como la octava ciudad mas contaminada a nivel de américa latina y el Perú es considerada en el puesto 22 a nivel mundial según World Air  Quality. Esta investigación permitira brindar un aporte académico acerca de las denuncias por contaminación ambiental en los últimos 3 años en el Perú que afectan el agua, aire, fauna y entre otras. 
 
 ## Objetivo
-Determinar si existe una relación entre la contaminación de suelos y las denuncias por contaminación ambiental dependiendo su ubicación en los últimos 3 años en el Perú.
+Determinar si existe una relación entre la contaminación de suelos y las denuncias por contaminación ambiental según su ubicación en los últimos 3 años en el Perú.
 
 ## Base de datos
 
@@ -147,7 +147,7 @@ ED2
 
 ## Cantidad de denuncia por tipo de contaminación en los años 2019-2020
 
-###La grafica a continuacion brinda información relevante sobre las actividades economicas en el Perú que se ven afectadas por contaminantes ambientales como Bromo, Cromo, Mercurio ,etc.
+###La grafica a continuacion brinda información relevante sobre las actividades economicas en el Perú que se ven afectadas por contaminantes ambientales como Bromo, Cromo, Mercurio ,etc durante el transcurso de los años 2019-2020.
 ```{r,  echo= FALSE}
 tipo <- c("AGUA","SUELO","FAUNA","AIRE","FLORA","POBLACION","EFLUENTES","RESIDUOS SOLIDOS","GASES/HUMO","MATERIAL PARTICULADO`","TALA","RADIACION NO IONIZANTE","FUENTE VISUAL","FUENTE VISUAL")
 
@@ -161,7 +161,7 @@ DDA<-data.frame(tipo, cantidad)
 barplot(DDA[1:14,2],legend=c("AGUA","SUELO","FAUNA","AIRE","FLORA","POBLACION","EFLUENTES","RESIDUOS SOLIDOS","GASES/HUMO","MATERIAL PARTICULADO`","TALA","RADIACION NO IONIZANTE","FUENTE VISUAL","FUENTE VISUAL"), col =colores)
 
 ```
-La mayor cantidad de denuncias son por la contaminación de suelos, seguidos de aire y residuos solidos.
+La mayor cantidad de denuncias durante los años 2019-2020 son por la contaminación de suelos, seguidos de aire y residuos solidos.
 
 
 
@@ -188,7 +188,6 @@ barplot(Tabla1920[1:25,2],legend=c("Lima","Ancash","Cusco", "Arequipa","Libertad
 ## Diagrama de caja de variable - data: Componentes ambientales del suelo-EAT
 
 ###A continuación, se han determinado los intervalos confianza y se han determinado el número suelos contaminados con el fin de comprobar si existe una relacion entre ambos.
-
 ### Relavantes:
 ```{r, echo=FALSE}
 boxplot(CAS$Arsénico, horizontal = TRUE, main = "Arsénico", col="cornsilk2", xlab= "Arsénico (mg/m3)",pch= 19, ylim=c(0,400) )
@@ -550,8 +549,7 @@ IDC
 
 
 ###OTROS CONTAMINANTES
-
-###Las gráficas a continuacion, muestran la dispersion que existe en los diferentes contaminantes del suelo. Esto se realiza con el fin de determinar valores atipicos .
+###Las gráficas a continuacion, muestran la dispersion que existe en los diferentes contaminantes del suelo.
 
 ###Aluminio
 ```{r, echo=FALSE}
