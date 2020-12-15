@@ -201,7 +201,7 @@ Tab
 ```
 
 
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es de que la media es igual a 42.6 . Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es igual a 42.6 . Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
@@ -240,7 +240,7 @@ Tab
 
 ```
 
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es de que la media es igual a 253.7. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es igual a 253.7. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
@@ -283,7 +283,7 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es de que la media es igual a 1102.481. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es igual a 1102.481. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 5%
@@ -325,7 +325,7 @@ Tab
 ```
 
 Spolo se econtraron en 14 suelos el componente
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es de que la media es igual a 3. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es igual a 3. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
@@ -365,7 +365,7 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 varia entre 1-1500 mg/kg
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es de que la media es igual a  23.26. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es igual a  23.26. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
@@ -405,7 +405,7 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es de que la media es igual a 1.749. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es igual a 1.749. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
@@ -443,7 +443,7 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 varia entre 1-1500 mg/kg
-Una muestra de 227 con un intervalo de confianza del 75%. La hipotesis nula es de que la media es igual a 197.78. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 75%. La hipotesis nula es que la media es igual a 197.78. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 75%
@@ -482,7 +482,7 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 varia entre 1-1500 mg/kg
-Una muestra de 227 con un intervalo de confianza del 75%. La hipotesis nula es de que la media es igual a 277. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 75%. La hipotesis nula es que la media es igual a 277. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 75%
@@ -520,7 +520,7 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 ###Cromo
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es de que la media es igual a 23.26. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es igual a 23.26. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
