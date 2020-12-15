@@ -147,6 +147,7 @@ ED2
 
 ## Cantidad de denuncia por tipo de contaminación en los años 2019-2020
 
+###La grafica a continuacion brinda información relevante sobre las actividades economicas en el Perú que se ven afectadas por contaminantes ambientales como Bromo, Cromo, Mercurio ,etc.
 ```{r,  echo= FALSE}
 tipo <- c("AGUA","SUELO","FAUNA","AIRE","FLORA","POBLACION","EFLUENTES","RESIDUOS SOLIDOS","GASES/HUMO","MATERIAL PARTICULADO`","TALA","RADIACION NO IONIZANTE","FUENTE VISUAL","FUENTE VISUAL")
 
@@ -836,48 +837,75 @@ Tab
 
 ```{r}
 l1<- lm(CAS$Mercurio~CAS$Plomo)
-plot(l1)
-summary(CAS$Plomo)
-Correlacion<- cor(CAS$Mercurio,CAS$Plomo)
-Tabla <- data.frame(Correlacion)
-Tabla
+cor(CAS$Mercurio,CAS$Plomo)
+plot(CAS$Plomo,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300))
+abline(l1, col="red")
 ```
 
 
-
+### Regresion lineal
 ```{r}
 l1 <- lm(CAS$Mercurio~CAS$Bario)
 cor(CAS$Mercurio,CAS$Bario)
-plot(l1)
+plot(CAS$Bario,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300))
+abline(l1, col="red")
 ```
 
 
 
 ```{r}
 l1 <- lm(CAS$Mercurio~CAS$Cadmio)
-cor(CAS$Mercurio,CAS$Cadmio)
-plot(l1)
-plot(CAS$Mercurio~CAS$Cadmio)
-summary(CAS$Cadmio)
-summary(CAS$Mercurio)
+plot(CAS$Cadmio,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,10300))
+abline(l1, col="red")
+cor(CAS$Mercurio,CAS$Cadmio, use="complete.obs")
 ```
 
 
 
 ```{r}
-cor(CAS$Arsénico,CAS$Bario, use="complete.obs")
-cor(CAS$Arsénico,CAS$Cadmio, use="complete.obs")
-cor(CAS$Arsénico,CAS$Cromo, use="complete.obs")
-cor(CAS$Arsénico,CAS$Mercurio, use="complete.obs")
-cor(CAS$Arsénico,CAS$Plomo, use="complete.obs")
-cor(CAS$Arsénico,CAS$`Cianuro libre`, use="complete.obs")
-cor(CAS$Arsénico,CAS$Cobre, use="complete.obs")
-cor(CAS$Arsénico,CAS$Cobalto, use="complete.obs")
+l1 <- lm(CAS$Mercurio~CAS$Cobalto)
+plot(CAS$Cobalto,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300))
+abline(l1, col="red")
+cor(CAS$Mercurio,CAS$Cobalto,use="complete.obs")
+```
 
+
+```{r}
+l1 <- lm(CAS$Plomo~CAS$Bario)
+plot(CAS$Bario,CAS$Plomo,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1000))
+abline(l1, col="red")
+cor(CAS$Plomo,CAS$Bario,use="complete.obs")
 ```
 
 
 
+```{r}
+l1 <- lm(CAS$Cobalto~CAS$Bario)
+plot(CAS$Bario,CAS$Cobalto,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1000))
+abline(l1, col="red")
+cor(CAS$Bario,CAS$Cobalto,use="complete.obs")
+```
+
+
+```{r}
+l1 <- lm(CAS$Cadmio~CAS$Plomo)
+plot(CAS$Plomo,CAS$Cadmio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300))
+abline(l1, col="red")
+cor(CAS$Plomo,CAS$Cadmio,use="complete.obs")
+```
+
+
+
+
+
+
+```{r}
+l1<- lm(CAS$Mercurio~CAS$Plomo)
+plot(l1)
+cor(CAS$Mercurio,CAS$Plomo)
+plot(CAS$Plomo,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300))
+abline(l1, col="red")
+```
 
 
 
