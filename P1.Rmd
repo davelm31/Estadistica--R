@@ -56,7 +56,11 @@ CAA <- read_csv("CAA.csv", col_types = cols(Aluminio = col_number(),
 
 # Determinar la relacion entre los posibles contaminantes ambientales y el suelo 
 
+
+## Objetivo
 En este trabajo analizaremos la base de datos de los componentes de suelo tomado aleatoreamente. Con ello se podria determinar si existen suelos contaminados.
+
+## Importancia
 
 ## Observaciones completas y datos faltantes
 
@@ -195,7 +199,7 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 
 ```
-El estadistico de prueba es la linea azul y el z critico es la linea roja
+El estadistico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipotesis nula que la la meida poblacional es menor o igual a 40 ppm
 ```{r}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
@@ -664,6 +668,8 @@ plot(CAS$Cobalto,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300),xlab="Co
 abline(l1, col="red")
 cor(CAS$Mercurio,CAS$Cobalto,use="complete.obs")
 ```
+
+
 
 
 ```{r, echo=FALSE}
