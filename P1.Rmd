@@ -56,7 +56,7 @@ CAA <- read_csv("CAA.csv", col_types = cols(Aluminio = col_number(),
 
 # Determinar la relacion entre los posibles contaminantes ambientales y el suelo 
 
-En este trabajo analizaremos la base de datos de los componentes de suelo tomado aleatoreamente. Con ello se podria determinar
+En este trabajo analizaremos la base de datos de los componentes de suelo tomado aleatoreamente. Con ello se podria determinar si existen suelos contaminados.
 
 ## Observaciones completas y datos faltantes
 
@@ -91,7 +91,7 @@ ED
  
 ### Variables Discretas:
 
-Para la base de datos del suelo se usaran los componentes como variables ya que nos permitiran determinar si son  suelos contaminados o no
+Para la base de datos del suelo se usaran los componentes como variables ya que nos permitiran determinar si son  suelos contaminados o no. Las unidades de medida son partes por millon (ppm)
 
 ```{r, echo=FALSE}
 Variables2 <- c("ESTE","NORTE","Aluminio","Antionio","Arsénico",	"Bario","Berilio","Bismuto","Boro","Cadmio","Calcio","Cerio","Cianuro libre","Cobalto","Cobre","Cromo","Cromo Hexavelante","Estaño", "Estroncio","Fósforo","Hierro","Litio","Magnecio","Manganeso","Mercurio","Molibdeno","Níquel","Plata","Plomo","Potasio","Selenio","Sodio","Talio","Torio")
@@ -111,6 +111,7 @@ ED2
 
 
 ## Cantidad de denuncia por tipo de contaminación en los años 2019-2020
+La razon de porque elegimos analizar los suelos es porque del 2019 al 2020 se presentaron diferentes denucnas por diferente sector donde la mayor cantidad de denuncias era la del suelo
 
 ###La grafica a continuacion brinda información relevante sobre las actividades economicas en el Perú que se ven afectadas por contaminantes ambientales como Bromo, Cromo, Mercurio ,etc durante el transcurso de los años 2019-2020.
 ```{r,  echo= FALSE}
@@ -154,6 +155,9 @@ barplot(Tabla1920[1:25,2],legend=c("Lima","Ancash","Cusco", "Arequipa","Libertad
 
 ### A continuación, se han determinado los intervalos confianza y se han determinado el número suelos contaminados con el fin de comprobar si existe una relacion entre ambos.
 ### Relavantes:
+
+Utilizaremos graficas de diagrma de caja para ver los valores atipicos y de distribucion normal para rechazar o no la hipotesis nula.
+
 ```{r, echo=FALSE}
 boxplot(CAS$Arsénico, horizontal = TRUE, main = "Arsénico", col="cornsilk2", xlab= "Arsénico (mg/m3)",pch= 19, ylim=c(0,400) )
 abline(v = mean(CAS$Arsénico, na.rm = TRUE, ), col = "red")
@@ -166,11 +170,11 @@ Tab
 ```
 
 
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es menor o igual a 40 . Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media poblacional es menor o igual a 40ppm . Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
-n=227
-intercalo de confianza del 95%
-nivel de significancia del 5%
+n=227,
+intercalo de confianza del 95%,
+nivel de significancia del 5%,
 ho: u<=40
 hi  u>40
 ```{r, echo=FALSE}
@@ -191,7 +195,15 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 
 ```
-
+El estadistico de prueba es la linea azul y el z critico es la linea roja
+```{r}
+z <- qnorm(0.95)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+N<- c("Estadistico de prueba","Z critico")
+Valores <- c(Zcritico,z)
+Tab <- data.frame(N, Valores)
+Tab
+```
 
 
 #### Bario
@@ -222,7 +234,7 @@ Media_Muestral <- mean(CAS$Bario, na.rm=TRUE)
 Desviacion_Estandar_Muestral <- sd(CAS$Bario, na.rm=TRUE)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
 
-Xs <- seq(-250, 5, by = 0.1)
+Xs <- seq(-5, 5, by = 0.1)
 plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
 abline(v = z, lty = 2, col = "red")
 abline(h = 0, col = "gray")
@@ -230,7 +242,15 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-
+El estadistico de prueba es la linea azul y el z critico es la linea roja
+```{r}
+z <- qnorm(0.95)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+N<- c("Estadistico de prueba","Z critico")
+Valores <- c(Zcritico,z)
+Tab <- data.frame(N, Valores)
+Tab
+```
 
 
 
@@ -272,7 +292,15 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-
+El estadistico de prueba es la linea azul y el z critico es la linea roja
+```{r}
+z <- qnorm(0.95)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+N<- c("Estadistico de prueba","Z critico")
+Valores <- c(Zcritico,z)
+Tab <- data.frame(N, Valores)
+Tab
+```
 
 
 
@@ -327,7 +355,15 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-
+El estadistico de prueba es la linea azul y el z critico es la linea roja
+```{r}
+z <- qnorm(0.95)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+N<- c("Estadistico de prueba","Z critico")
+Valores <- c(Zcritico,z)
+Tab <- data.frame(N, Valores)
+Tab
+```
 
 
 
@@ -369,6 +405,15 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
+El estadistico de prueba es la linea azul y el z critico es la linea roja
+```{r}
+z <- qnorm(0.95)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+N<- c("Estadistico de prueba","Z critico")
+Valores <- c(Zcritico,z)
+Tab <- data.frame(N, Valores)
+Tab
+```
 `
 
 ### Plomo
@@ -407,7 +452,15 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 
 ```
-
+El estadistico de prueba es la linea azul y el z critico es la linea roja
+```{r}
+z <- qnorm(0.95)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+N<- c("Estadistico de prueba","Z critico")
+Valores <- c(Zcritico,z)
+Tab <- data.frame(N, Valores)
+Tab
+```
 
 ### Zinc
 
@@ -446,7 +499,15 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-
+El estadistico de prueba es la linea azul y el z critico es la linea roja
+```{r}
+z <- qnorm(0.95)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+N<- c("Estadistico de prueba","Z critico")
+Valores <- c(Zcritico,z)
+Tab <- data.frame(N, Valores)
+Tab
+```
 
 ### Cobre
 ```{r, echo=FALSE}
@@ -482,7 +543,15 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-
+El estadistico de prueba es la linea azul y el z critico es la linea roja
+```{r}
+z <- qnorm(0.95)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+N<- c("Estadistico de prueba","Z critico")
+Valores <- c(Zcritico,z)
+Tab <- data.frame(N, Valores)
+Tab
+```
 
 
 
@@ -521,7 +590,15 @@ abline(h = 0, col = "gray")
 abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
-
+El estadistico de prueba es la linea azul y el z critico es la linea roja
+```{r}
+z <- qnorm(0.95)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+N<- c("Estadistico de prueba","Z critico")
+Valores <- c(Zcritico,z)
+Tab <- data.frame(N, Valores)
+Tab
+```
 
 
 
