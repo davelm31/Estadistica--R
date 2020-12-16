@@ -56,44 +56,9 @@ CAA <- read_csv("CAA.csv", col_types = cols(Aluminio = col_number(),
 
 # Determinar la relacion entre los posibles contaminantes ambientales y el suelo 
 
-
-## Integrantes:
-David León, Harold Canto Vidal, Marcelo Surco Salas, Gonzalo Suárez
-
-## Importancia
-Hoy en día Lima es una de las ciudades considerada como la octava ciudad mas contaminada a nivel de américa latina y el Perú es considerada en el puesto 22 a nivel mundial según World Air  Quality. Esta investigación permitira brindar un aporte académico acerca de las denuncias por contaminación ambiental en los últimos 3 años en el Perú que afectan el agua, aire, fauna y entre otras. 
-
-## Objetivo
-Determinar si existe una relación entre la contaminación de suelos y las denuncias por contaminación ambiental según su ubicación en los últimos 3 años en el Perú.
-
-## Base de datos
-
-La  información es obtenida de OEFA datos abiertos. Se trabajara con 3 bases que son denuncias SINADA y componentes ambientales del suelo- EAT.
-Otras bases de datos son: contaminación de agua, fauna y flora entre otros.
-
+En este trabajo analizaremos la base de datos de los componentes de suelo tomado aleatoreamente. Con ello se podria determinar
 
 ## Observaciones completas y datos faltantes
-En denuncias SINADA:
-2018
-No se presenta ningún dato faltante ni observación faltante.
-```{r, echo=FALSE}
-
-Obs <- c("Observaciones","Observaciones incompletas","Datos faltantes", "Variables Totales")
-N <- c(nrow(DD18),sum(!complete.cases(DD18)),sum(is.na(DD18)), ncol(DD18) )
-OB1 <- data.frame(Obs,N)
-OB1
-```
-
-
-2019-2020
-No se presenta ningún dato faltante ni observación faltante.
-```{r, echo=FALSE}
-
-Obs3 <- c("Observaciones","Observaciones incompletas","Datos faltantes", "Variables Totales")
-N3 <- c(nrow(DD1920),sum(!complete.cases(DD1920)),sum(is.na(DD1920)), ncol(DD1920) )
-OB3 <- data.frame(Obs3,N3)
-OB3
-```
 
 Componentes ambientales del suelo-EAT
  
@@ -187,7 +152,7 @@ barplot(Tabla1920[1:25,2],legend=c("Lima","Ancash","Cusco", "Arequipa","Libertad
 
 ## Diagrama de caja de variable - data: Componentes ambientales del suelo-EAT
 
-###A continuación, se han determinado los intervalos confianza y se han determinado el número suelos contaminados con el fin de comprobar si existe una relacion entre ambos.
+### A continuación, se han determinado los intervalos confianza y se han determinado el número suelos contaminados con el fin de comprobar si existe una relacion entre ambos.
 ### Relavantes:
 ```{r, echo=FALSE}
 boxplot(CAS$Arsénico, horizontal = TRUE, main = "Arsénico", col="cornsilk2", xlab= "Arsénico (mg/m3)",pch= 19, ylim=c(0,400) )
@@ -201,31 +166,33 @@ Tab
 ```
 
 
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es igual a 42.6 . Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es menor o igual a 40 . Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
 nivel de significancia del 5%
-ho: u=42.6
-hi u<42.6 o u>42.6
-```{r}
-summary(CAS$Arsénico)
+ho: u<=40
+hi  u>40
+```{r, echo=FALSE}
+
+
+u = 40
 n=227
-ns<- (1-0.95)/2
-Zcritico <- qnorm(0.95+ns)
-Desviacion_Estandar_Muestral <- sd(CAS$Arsénico, na.rm=TRUE)
+z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Arsénico, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+Desviacion_Estandar_Muestral <- sd(CAS$Arsénico, na.rm=TRUE)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+
+Xs <- seq(-4, 4, by = 0.1)
+plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
+abline(v = z, lty = 2, col = "red")
+abline(h = 0, col = "gray")
+abline(v = Zcritico,lty = 1 , col = "blue")
 
 
 ```
 
-```{r, echo= FALSE}
-IDC <- data.frame(Desviacion_Estandar_Muestral,Media_Muestral,Zcritico,I.Izquierdo,I.Derecho,Precisión)
-IDC
-```
+
 
 #### Bario
 ```{r, echo=FALSE}
@@ -240,37 +207,34 @@ Tab
 
 ```
 
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es igual a 253.7. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es menor o igual a 3500. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
 nivel de significancia del 5%
-ho: u=253.7
-hi u<253.7 o u>253.7
-```{r}
-summary(CAS$Bario)
+ho: u<=3500
+hi  u>3500
+```{r, echo=FALSE}
+u = 3500
 n=227
-ns<- (1-0.75)/2
-Zcritico <- qnorm(0.75+ns)
-Desviacion_Estandar_Muestral <- sd(CAS$Bario, na.rm=TRUE)
+z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Bario, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+Desviacion_Estandar_Muestral <- sd(CAS$Bario, na.rm=TRUE)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+
+Xs <- seq(-250, 5, by = 0.1)
+plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
+abline(v = z, lty = 2, col = "red")
+abline(h = 0, col = "gray")
+abline(v = Zcritico,lty = 1 , col = "blue")
+
 ```
 
-```{r, echo= FALSE}
-IDC <- data.frame(Desviacion_Estandar_Muestral,Media_Muestral,Zcritico,I.Izquierdo,I.Derecho,Precisión)
-IDC
-```
 
 
 
 
-
-
-
-###Cadmio
+### Cadmio
 
 ```{r, echo=FALSE}
 boxplot(CAS$Cadmio, horizontal = TRUE, main = "Cadmio", col="cornsilk2", xlab= "Cadmio (mg/m3)",pch= 19, ylim=c(0,9000) )
@@ -283,35 +247,36 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es igual a 1102.481. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es menor o igual a 3. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
-intercalo de confianza del 5%
-nivel de significancia del 95%
-ho: u=1102.481
-hi u<1102.481 o u>1102.481
-```{r}
-summary(CAS$Cadmio)
+intercalo de confianza del 95%
+nivel de significancia del 5    5%
+ho: u<=3
+hi u>3
+```{r, echo=FALSE}
+u = 3
 n=227
-ns<- (1-0.05)/2
-Zcritico <- qnorm(0.05+ns)
-Desviacion_Estandar_Muestral <- sd(CAS$Cadmio, na.rm=TRUE)
+z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Cadmio, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+Desviacion_Estandar_Muestral <- sd(CAS$Cadmio, na.rm=TRUE)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+
+Xs <- seq(-4, 4, by = 0.1)
+plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
+abline(v = z, lty = 2, col = "red")
+abline(h = 0, col = "gray")
+abline(v = Zcritico,lty = 1 , col = "blue")
+
 
 
 ```
 
-```{r, echo= FALSE}
-IDC <- data.frame(Desviacion_Estandar_Muestral,Media_Muestral,Zcritico,I.Izquierdo,I.Derecho,Precisión)
-IDC
-```
 
 
 
-###Ciauro libre
+
+### Ciauro libre
 ```{r, echo=FALSE}
 boxplot(CAS$`Cianuro libre`, horizontal = TRUE, main = "Cianuro Libre", col="cornsilk2", xlab= "Cianuro Libre (mg/m3)",pch= 19, ylim=c(0,5) )
 abline(v = mean(CAS$`Cianuro libre`, na.rm = TRUE, ), col = "red")
@@ -324,36 +289,8 @@ Tab
 
 ```
 
-Spolo se econtraron en 14 suelos el componente
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es igual a 3. Al ser una muestra mayor a 30 trabajaremos con qnorm.
-Datos:
-n=227
-intercalo de confianza del 95%
-nivel de significancia del 5%
-ho: u=3
-hi u<3 o u>3
-```{r}
-summary(CAS$`Cianuro libre`)
-n=227
-ns<- (1-0.95)/2
-Zcritico <- qnorm(0.95+ns)
-Desviacion_Estandar_Muestral <- sd(CAS$`Cianuro libre`, na.rm=TRUE)
-Media_Muestral <- mean(CAS$`Cianuro libre`, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
 
-
-```
-
-```{r, echo= FALSE}
-IDC <- data.frame(Desviacion_Estandar_Muestral,Media_Muestral,Zcritico,I.Izquierdo,I.Derecho,Precisión)
-IDC
-```
-
-
-
-###Cromo
+### Cromo
 ```{r, echo=FALSE}
 boxplot(CAS$Cromo, horizontal = TRUE, main = "Cromo", col="cornsilk2", xlab= "Cromo (mg/m3)",pch= 19, ylim=c(0,100) )
 abline(v = mean(CAS$Cromo, na.rm = TRUE, ), col = "red")
@@ -365,35 +302,36 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 varia entre 1-1500 mg/kg
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es igual a  23.26. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media menor o igual a 100. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
 nivel de significancia del 5%
-ho: u= 23.26
-hi u< 23.26 o u> 23.26
-```{r}
-summary(CAS$Cromo)
+ho: u<= 100
+hi u>100
+```{r, echo=FALSE}
+u = 100
 n=227
-ns<- (1-0.95)/2
-Zcritico <- qnorm(0.95+ns)
-Desviacion_Estandar_Muestral <- sd(CAS$Cromo, na.rm=TRUE)
+z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Cromo, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+Desviacion_Estandar_Muestral <- sd(CAS$Cromo, na.rm=TRUE)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+
+Xs <- seq(-50, 50, by = 0.1)
+plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
+abline(v = z, lty = 2, col = "red")
+abline(h = 0, col = "gray")
+abline(v = Zcritico,lty = 1 , col = "blue")
+
 
 
 ```
 
-```{r, echo= FALSE}
-IDC <- data.frame(Desviacion_Estandar_Muestral,Media_Muestral,Zcritico,I.Izquierdo,I.Derecho,Precisión)
-IDC
-```
 
 
 
-###Mercurio
+
+### Mercurio
 ```{r, echo=FALSE}
 boxplot(CAS$Mercurio, horizontal = TRUE, main = "Mercurio", col="cornsilk2", xlab= "Mercurio (mg/m3)",pch= 19, ylim=c(0,7) )
 abline(v = mean(CAS$Mercurio, na.rm = TRUE, ), col = "red")
@@ -405,33 +343,35 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es igual a 1.749. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es menor o igual a 1.749. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
 nivel de significancia del 5%
 ho: u=1.749
 hi u<1.749 o u>1.749
-```{r}
-summary(CAS$Mercurio)
+```{r, echo=FALSE}
+u = 6.6
 n=227
-ns<- (1-0.95)/2
-Zcritico <- qnorm(0.95+ns)
-Desviacion_Estandar_Muestral <- sd(CAS$Mercurio, na.rm=TRUE)
+z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Mercurio, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+Desviacion_Estandar_Muestral <- sd(CAS$Mercurio, na.rm=TRUE)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+
+
+Xs <- seq(-50, 10, by = 0.1)
+plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
+abline(v = z, lty = 2, col = "red")
+abline(h = 0, col = "gray")
+abline(v = Zcritico,lty = 1 , col = "blue")
+
 
 
 ```
 
-```{r, echo= FALSE}
-IDC <- data.frame(Desviacion_Estandar_Muestral,Media_Muestral,Zcritico,I.Izquierdo,I.Derecho,Precisión)
-IDC
-```
+`
 
-###Plomo
+### Plomo
 ```{r, echo=FALSE}
 boxplot(CAS$Plomo, horizontal = TRUE, main = "Plomo", col="cornsilk2", xlab= "Plomo (mg/m3)",pch= 19, ylim=c(0,1000) )
 abline(v = mean(CAS$Plomo, na.rm = TRUE, ), col = "red")
@@ -442,34 +382,34 @@ Elemento <- c("Plomo")
 Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
-varia entre 1-1500 mg/kg
-Una muestra de 227 con un intervalo de confianza del 75%. La hipotesis nula es que la media es igual a 197.78. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+
+Una muestra de 227 con un intervalo de confianza del 75%. La hipotesis nula es que la media es menor o igual a 140. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
-intercalo de confianza del 75%
-nivel de significancia del 25%
-ho: u=197.78
-hi u<197.78 o u>197.78
-```{r}
-summary(CAS$Plomo)
+intercalo de confianza del 95%
+nivel de significancia del 5%
+ho: u<=140
+hi u>140
+```{r, echo=FALSE}
+u = 140
 n=227
-ns<- (1-0.75)/2
-Zcritico <- qnorm(0.75+ns)
-Desviacion_Estandar_Muestral <- sd(CAS$Plomo, na.rm=TRUE)
+z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Plomo, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+Desviacion_Estandar_Muestral <- sd(CAS$Plomo, na.rm=TRUE)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+
+Xs <- seq(-4, 4, by = 0.1)
+plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
+abline(v = z, lty = 2, col = "red")
+abline(h = 0, col = "gray")
+abline(v = Zcritico,lty = 1 , col = "blue")
+
 
 
 ```
 
-```{r, echo= FALSE}
-IDC <- data.frame(Desviacion_Estandar_Muestral,Media_Muestral,Zcritico,I.Izquierdo,I.Derecho,Precisión)
-IDC
-```
 
-###Zinc
+### Zinc
 
 ```{r, echo=FALSE}
 boxplot(CAS$Zinc, horizontal = TRUE, main = "Zinc", col="cornsilk2", xlab= "Zinc (mg/m3)",pch= 19, ylim=c(0,1000) )
@@ -482,33 +422,33 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 varia entre 1-1500 mg/kg
-Una muestra de 227 con un intervalo de confianza del 75%. La hipotesis nula es que la media es igual a 277. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un intervalo de confianza del 75%. La hipotesis nula es que la media es menor o igual a 277. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
-intercalo de confianza del 75%
-nivel de significancia del 25%
+intercalo de confianza del 95%
+nivel de significancia del 5%
 ho: u=277
 hi u<277 o u>277
-```{r}
-summary(CAS$Zinc)
+```{r, echo=FALSE}
+u = 300
 n=227
-ns<- (1-0.75)/2
-Zcritico <- qnorm(0.75+ns)
-Desviacion_Estandar_Muestral <- sd(CAS$Zinc, na.rm=TRUE)
+z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Zinc, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+Desviacion_Estandar_Muestral <- sd(CAS$Zinc, na.rm=TRUE)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+
+Xs <- seq(-4, 4, by = 0.1)
+plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
+abline(v = z, lty = 2, col = "red")
+abline(h = 0, col = "gray")
+abline(v = Zcritico,lty = 1 , col = "blue")
 
 
 ```
 
-```{r, echo= FALSE}
-IDC <- data.frame(Desviacion_Estandar_Muestral,Media_Muestral,Zcritico,I.Izquierdo,I.Derecho,Precisión)
-IDC
-```
 
-###Cobre
+
+### Cobre
 ```{r, echo=FALSE}
 boxplot(CAS$Cobre, horizontal = TRUE, main = "Cobre", col="cornsilk2", xlab= "Cobre (mg/m3)",pch= 19, ylim=c(0,200) )
 abline(v = mean(CAS$Cobre, na.rm = TRUE, ), col = "red")
@@ -519,7 +459,46 @@ Elemento <- c("Cobre")
 Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
-###Cromo
+Una muestra de 227 con un intervalo de confianza del 75%. La hipotesis nula es que la media es menor o igual a 91. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Datos:
+n=227
+intercalo de confianza del 95%
+nivel de significancia del 5%
+ho: u=277
+hi u<277 o u>277
+```{r, echo=FALSE}
+u = 91
+n=227
+z <- qnorm(0.95)
+Media_Muestral <- mean(CAS$Cobre, na.rm=TRUE)
+Desviacion_Estandar_Muestral <- sd(CAS$Cobre, na.rm=TRUE)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+
+Xs <- seq(-35, 10, by = 0.2)
+plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
+abline(v = z, lty = 2, col = "red")
+abline(h = 0, col = "gray")
+abline(v = Zcritico,lty = 1 , col = "blue")
+
+```
+
+
+
+
+
+### Cromo
+
+```{r, echo=FALSE}
+boxplot(CAS$Cromo, horizontal = TRUE, main = "Cromo", col="cornsilk2", xlab= "Cromo (mg/m3)",pch= 19, ylim=c(0,200) )
+abline(v = mean(CAS$Cromo, na.rm = TRUE, ), col = "red")
+Media <- mean(CAS$Cromo, na.rm=TRUE, col="red")
+Mediana <-median(CAS$Cromo, na.rm=TRUE)
+No_contaminado <- sum(CAS$Cromo > 1 & CAS$Cromo < 250,na.rm=TRUE)
+Elemento <- c("Cromo")
+Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
+Tab
+```
+
 Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es igual a 23.26. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
@@ -527,31 +506,29 @@ intercalo de confianza del 95%
 nivel de significancia del 5%
 ho: u=23.26
 hi u<23.26 o u>23.26
-```{r}
-summary(CAS$Cromo)
+```{r, echo = FALSE}
+u = 64
 n=227
-ns<- (1-0.95)/2
-Zcritico <- qnorm(0.95+ns)
-Desviacion_Estandar_Muestral <- sd(CAS$Cromo, na.rm=TRUE)
+z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Cromo, na.rm=TRUE)
-I.Izquierdo<- Media_Muestral-Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-I.Derecho<- Media_Muestral+Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
-Precisión <- Zcritico*Desviacion_Estandar_Muestral/sqrt(n)
+Desviacion_Estandar_Muestral <- sd(CAS$Cromo, na.rm=TRUE)
+Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
 
+Xs <- seq(-35, 10, by = 0.2)
+plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
+abline(v = z, lty = 2, col = "red")
+abline(h = 0, col = "gray")
+abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-```{r, echo= FALSE}
-IDC <- data.frame(Desviacion_Estandar_Muestral,Media_Muestral,Zcritico,I.Izquierdo,I.Derecho,Precisión)
-IDC
-```
 
 
 
-###OTROS CONTAMINANTES
-###Las gráficas a continuacion, muestran la dispersion que existe en los diferentes contaminantes del suelo.
+### OTROS CONTAMINANTES
+### Las gráficas a continuacion, muestran la dispersion que existe en los diferentes contaminantes del suelo.
 
-###Aluminio
+### Aluminio
 ```{r, echo=FALSE}
 boxplot(CAS$Aluminio, horizontal = TRUE, main = "Aluminio", col="cornsilk2", xlab= "Aluminio (mg/m3)",pch= 19, ylim=c(0,45000) )
 abline(v = mean(CAS$Aluminio, na.rm = TRUE, ), col = "red")
@@ -572,268 +549,11 @@ Tab
 ```
 
 
-###Berilio
-```{r, echo=FALSE}
-boxplot(CAS$Berilio, horizontal = TRUE, main = "Berilio", col="cornsilk2", xlab= "Berilio (mg/m3)",pch= 19, ylim=c(0,1500) )
-abline(v = mean(CAS$Berilio, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Berilio, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Berilio, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-###Bismuto
-```{r, echo=FALSE}
-boxplot(CAS$Bismuto, horizontal = TRUE, main = "Bismuto", col="cornsilk2", xlab= "Bismuto (mg/m3)",pch= 19, ylim=c(0,2800) )
-abline(v = mean(CAS$Bismuto, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Bismuto, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Bismuto, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-###Boro
-```{r, echo=FALSE}
-boxplot(CAS$Boro, horizontal = TRUE, main = "Boro", col="cornsilk2", xlab= "Boro (mg/m3)",pch= 19, ylim=c(0,1100) )
-abline(v = mean(CAS$Boro, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Boro, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Boro, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
 
 
-
-###Calcio
-```{r, echo=FALSE}
-boxplot(CAS$Calcio, horizontal = TRUE, main = "Calcio", col="cornsilk2", xlab= "Calcio (mg/m3)",pch= 19, ylim=c(0,10500) )
-abline(v = mean(CAS$Calcio, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Calcio, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Calcio, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-###Cerio
-```{r, echo=FALSE}
-boxplot(CAS$Cerio, horizontal = TRUE, main = "Cerio", col="cornsilk2", xlab= "Cerio (mg/m3)",pch= 19, ylim=c(0,10300) )
-abline(v = mean(CAS$Cerio, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Cerio, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Cerio, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-
-###Cobalto
-```{r, echo=FALSE}
-boxplot(CAS$Cobalto, horizontal = TRUE, main = "Cobalto", col="cornsilk2", xlab= "Cobalto (mg/m3)",pch= 19, ylim=c(0,800) )
-abline(v = mean(CAS$Cobalto, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Cobalto, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Cobalto, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-
-###Estaño
-```{r, echo=FALSE}
-boxplot(CAS$Estaño, horizontal = TRUE, main = "Estaño", col="cornsilk2", xlab= "Estaño (mg/m3)",pch= 19, ylim=c(0,100) )
-abline(v = mean(CAS$Estaño, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Estaño, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Estaño, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-###Estroncio
-```{r, echo=FALSE}
-boxplot(CAS$Estroncio, horizontal = TRUE, main = "Estroncio", col="cornsilk2", xlab= "Estroncio (mg/m3)",pch= 19, ylim=c(0,1000) )
-abline(v = mean(CAS$Estroncio, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Estroncio, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Estroncio, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-
-###Fósforo
-```{r, echo=FALSE}
-boxplot(CAS$Fósforo, horizontal = TRUE, main = "Fósforo", col="cornsilk2", xlab= "Fósforo (mg/m3)",pch= 19, ylim=c(0,3500) )
-abline(v = mean(CAS$Fósforo, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Fósforo, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Fósforo, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-
-###Hierro
-```{r, echo=FALSE}
-boxplot(CAS$Hierro, horizontal = TRUE, main = "Hierro", col="cornsilk2", xlab= "Hierro (mg/m3)",pch= 19, ylim=c(0,80000) )
-abline(v = mean(CAS$Hierro, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Hierro, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Hierro, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-###Litio
+### Regresion lineal
 
 ```{r, echo=FALSE}
-boxplot(CAS$Litio, horizontal = TRUE, main = "Litio", col="cornsilk2", xlab= "Litio (mg/m3)",pch= 19, ylim=c(0,1200) )
-abline(v = mean(CAS$Litio, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Litio, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Litio, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-###Magnesio
-```{r, echo=FALSE}
-boxplot(CAS$Magnesio, horizontal = TRUE, main = "Magnesio", col="cornsilk2", xlab= "Magnesio (mg/m3)",pch= 19, ylim=c(0,17000) )
-abline(v = mean(CAS$Magnesio, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Magnesio, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Magnesio, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-
-###Manganeso
-```{r, echo=FALSE}
-boxplot(CAS$Manganeso, horizontal = TRUE, main = "Manganeso", col="cornsilk2", xlab= "Manganeso (mg/m3)",pch= 19, ylim=c(0,2000) )
-abline(v = mean(CAS$Manganeso, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Manganeso, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Manganeso, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-
-
-###Molibdeno
-```{r, echo=FALSE}
-boxplot(CAS$Molibdeno, horizontal = TRUE, main = "Molibdeno", col="cornsilk2", xlab= "Molibdeno (mg/m3)",pch= 19, ylim=c(0,1000) )
-abline(v = mean(CAS$Molibdeno, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Molibdeno, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Molibdeno, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-###Niquel
-
-```{r, echo=FALSE}
-boxplot(CAS$Níquel, horizontal = TRUE, main = "Níquel", col="cornsilk2", xlab= "Níquel (mg/m3)",pch= 19, ylim=c(0,1000) )
-abline(v = mean(CAS$Níquel, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Níquel, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Níquel, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-### Varia entre 1-1500 mg/kg
-
-```{r,echo=FALSE}
-No_contaminado <- sum(CAS$Níquel > 1 & CAS$Níquel < 1500,na.rm=TRUE)
-Elemento <- c("Níquel")
-COMS <- data.frame(Elemento,No_contaminado)
-COMS
-
-```
-
-
-
-###Plata
-```{r, echo=FALSE}
-boxplot(CAS$Plata, horizontal = TRUE, main = "Plata", col="cornsilk2", xlab= "Plata (mg/m3)",pch= 19, ylim=c(0,140) )
-abline(v = mean(CAS$Plata, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Plata, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Plata, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-###Potasio
-```{r, echo=FALSE}
-boxplot(CAS$Potasio, horizontal = TRUE, main = "Potasio", col="cornsilk2", xlab= "Potasio (mg/m3)",pch= 19, ylim=c(0,10000) )
-abline(v = mean(CAS$Potasio, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Potasio, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Potasio, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-###Selenio
-```{r, echo=FALSE}
-boxplot(CAS$Selenio, horizontal = TRUE, main = "Selenio", col="cornsilk2", xlab= "Selenio (mg/m3)",pch= 19, ylim=c(0,1000) )
-abline(v = mean(CAS$Selenio, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Selenio, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Selenio, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-###Sodio
-```{r, echo=FALSE}
-boxplot(CAS$Sodio, horizontal = TRUE, main = "Sodio", col="cornsilk2", xlab= "Sodio (mg/m3)",pch= 19, ylim=c(0,13000) )
-abline(v = mean(CAS$Sodio, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Sodio, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Sodio, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-###Talio
-```{r, echo=FALSE}
-boxplot(CAS$Talio, horizontal = TRUE, main = "Talio", col="cornsilk2", xlab= "Talio (mg/m3)",pch= 19, ylim=c(0,3000) )
-abline(v = mean(CAS$Talio, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Talio, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Talio, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-
-
-###Titanio
-```{r, echo=FALSE}
-boxplot(CAS$Titanio, horizontal = TRUE, main = "Titanio", col="cornsilk2", xlab= "Titanio (mg/m3)",pch= 19, ylim=c(0,5000) )
-abline(v = mean(CAS$Titanio, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Titanio, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Titanio, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-
-###Torio
-```{r, echo=FALSE}
-boxplot(CAS$Torio, horizontal = TRUE, main = "Torio", col="cornsilk2", xlab= "Torio (mg/m3)",pch= 19, ylim=c(0,10000) )
-abline(v = mean(CAS$Torio, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Torio, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Torio, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-###Uranio
-```{r, echo=FALSE}
-boxplot(CAS$Uranio, horizontal = TRUE, main = "Uranio", col="cornsilk2", xlab= "Uranio (mg/m3)",pch= 19, ylim=c(0,15000) )
-abline(v = mean(CAS$Uranio, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Uranio, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Uranio, na.rm=TRUE)
-Tab <- data.frame(Media,Mediana)
-Tab
-```
-
-
-
-
-
-
-
-
-```{r}
 l1<- lm(CAS$Mercurio~CAS$Plomo)
 cor(CAS$Mercurio,CAS$Plomo)
 plot(CAS$Plomo,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300))
@@ -841,8 +561,8 @@ abline(l1, col="red")
 ```
 
 
-### Regresion lineal
-```{r}
+
+```{r, echo = FAlSE}
 l1 <- lm(CAS$Mercurio~CAS$Bario)
 cor(CAS$Mercurio,CAS$Bario)
 plot(CAS$Bario,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300))
@@ -851,7 +571,7 @@ abline(l1, col="red")
 
 
 
-```{r}
+```{r, echo = FALSE}
 l1 <- lm(CAS$Mercurio~CAS$Cadmio)
 plot(CAS$Cadmio,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,10300))
 abline(l1, col="red")
@@ -860,7 +580,7 @@ cor(CAS$Mercurio,CAS$Cadmio, use="complete.obs")
 
 
 
-```{r}
+```{r, echo=FALSE}
 l1 <- lm(CAS$Mercurio~CAS$Cobalto)
 plot(CAS$Cobalto,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300))
 abline(l1, col="red")
@@ -868,7 +588,7 @@ cor(CAS$Mercurio,CAS$Cobalto,use="complete.obs")
 ```
 
 
-```{r}
+```{r, echo=FALSE}
 l1 <- lm(CAS$Plomo~CAS$Bario)
 plot(CAS$Bario,CAS$Plomo,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1000))
 abline(l1, col="red")
@@ -877,7 +597,7 @@ cor(CAS$Plomo,CAS$Bario,use="complete.obs")
 
 
 
-```{r}
+```{r, echo=FALSE}
 l1 <- lm(CAS$Cobalto~CAS$Bario)
 plot(CAS$Bario,CAS$Cobalto,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1000))
 abline(l1, col="red")
@@ -885,7 +605,7 @@ cor(CAS$Bario,CAS$Cobalto,use="complete.obs")
 ```
 
 
-```{r}
+```{r, echo=False}
 l1 <- lm(CAS$Cadmio~CAS$Plomo)
 plot(CAS$Plomo,CAS$Cadmio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300))
 abline(l1, col="red")
@@ -894,16 +614,10 @@ cor(CAS$Plomo,CAS$Cadmio,use="complete.obs")
 
 
 
-
-
-
-```{r}
-l1<- lm(CAS$Mercurio~CAS$Plomo)
-plot(l1)
-cor(CAS$Mercurio,CAS$Plomo)
-plot(CAS$Plomo,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300))
-abline(l1, col="red")
-```
+### Conclusiones:
+Los valores atipicos no significan totalmente que sean suelos contaminados por dichos elementos y para algunos elementos si.
+Si existen corelaciones moderadas pero no siempre se ajusta al modelo.
+Un elemento de depende de otro
 
 
 
