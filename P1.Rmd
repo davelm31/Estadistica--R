@@ -306,7 +306,7 @@ Tab
 
 ### Ciauro libre
 ```{r, echo=FALSE}
-plot(CAS$`Cianuro libre`, main = "Cianuro Libre")
+plot(CAS$`Cianuro libre`, main = "Cianuro Libre",ylab="Cianuro Libre (ppm)")
 
 Media <- mean(CAS$`Cianuro libre`, na.rm=TRUE, col="red")
 Mediana <-median(CAS$`Cianuro libre`, na.rm=TRUE)
@@ -629,11 +629,12 @@ Tab
 
 
 ### Regresion lineal
+Para la regresion lineal buscamos encontrar una posible relacion entre los elementos 
 
 ```{r, echo=FALSE}
 l1<- lm(CAS$Mercurio~CAS$Plomo)
 cor(CAS$Mercurio,CAS$Plomo)
-plot(CAS$Plomo,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300))
+plot(CAS$Plomo,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300), xlab="Plomo (ppm)", ylab="Mercurio (ppm)")
 abline(l1, col="red")
 ```
 
@@ -642,7 +643,7 @@ abline(l1, col="red")
 ```{r, echo = FAlSE}
 l1 <- lm(CAS$Mercurio~CAS$Bario)
 cor(CAS$Mercurio,CAS$Bario)
-plot(CAS$Bario,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300))
+plot(CAS$Bario,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300),xlab="Bario (ppm)", ylab="Mercurio (ppm)")
 abline(l1, col="red")
 ```
 
@@ -650,7 +651,7 @@ abline(l1, col="red")
 
 ```{r, echo = FALSE}
 l1 <- lm(CAS$Mercurio~CAS$Cadmio)
-plot(CAS$Cadmio,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,10300))
+plot(CAS$Cadmio,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,10300),xlab="Cadmio (ppm)", ylab="Mercurio (ppm)")
 abline(l1, col="red")
 cor(CAS$Mercurio,CAS$Cadmio, use="complete.obs")
 ```
@@ -659,7 +660,7 @@ cor(CAS$Mercurio,CAS$Cadmio, use="complete.obs")
 
 ```{r, echo=FALSE}
 l1 <- lm(CAS$Mercurio~CAS$Cobalto)
-plot(CAS$Cobalto,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300))
+plot(CAS$Cobalto,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300),xlab="Cobalto (ppm)", ylab="Mercurio (ppm)")
 abline(l1, col="red")
 cor(CAS$Mercurio,CAS$Cobalto,use="complete.obs")
 ```
@@ -667,7 +668,7 @@ cor(CAS$Mercurio,CAS$Cobalto,use="complete.obs")
 
 ```{r, echo=FALSE}
 l1 <- lm(CAS$Plomo~CAS$Bario)
-plot(CAS$Bario,CAS$Plomo,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1000))
+plot(CAS$Bario,CAS$Plomo,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1000),xlab="Bario (ppm)", ylab="Plomo (ppm)")
 abline(l1, col="red")
 cor(CAS$Plomo,CAS$Bario,use="complete.obs")
 ```
@@ -676,7 +677,7 @@ cor(CAS$Plomo,CAS$Bario,use="complete.obs")
 
 ```{r, echo=FALSE}
 l1 <- lm(CAS$Cobalto~CAS$Bario)
-plot(CAS$Bario,CAS$Cobalto,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1000))
+plot(CAS$Bario,CAS$Cobalto,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1000),xlab="Bario (ppm)", ylab="Cobalto (ppm)")
 abline(l1, col="red")
 cor(CAS$Bario,CAS$Cobalto,use="complete.obs")
 ```
@@ -684,7 +685,7 @@ cor(CAS$Bario,CAS$Cobalto,use="complete.obs")
 
 ```{r, echo=False}
 l1 <- lm(CAS$Cadmio~CAS$Plomo)
-plot(CAS$Plomo,CAS$Cadmio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300))
+plot(CAS$Plomo,CAS$Cadmio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300),xlab="Plomo (ppm)", ylab="Cadmio (ppm)")
 abline(l1, col="red")
 cor(CAS$Plomo,CAS$Cadmio,use="complete.obs")
 ```
