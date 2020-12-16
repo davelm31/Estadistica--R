@@ -306,8 +306,8 @@ Tab
 
 ### Ciauro libre
 ```{r, echo=FALSE}
-boxplot(CAS$`Cianuro libre`, horizontal = TRUE, main = "Cianuro Libre", col="cornsilk2", xlab= "Cianuro Libre (mg/m3)",pch= 19, ylim=c(0,5) )
-abline(v = mean(CAS$`Cianuro libre`, na.rm = TRUE, ), col = "red")
+plot(CAS$`Cianuro libre`, main = "Cianuro Libre")
+
 Media <- mean(CAS$`Cianuro libre`, na.rm=TRUE, col="red")
 Mediana <-median(CAS$`Cianuro libre`, na.rm=TRUE)
 No_contaminado <- sum(CAS$`Cianuro libre` > 0 & CAS$`Cianuro libre` <8 ,na.rm=TRUE)
