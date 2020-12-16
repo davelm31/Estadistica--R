@@ -156,11 +156,10 @@ barplot(Tabla1920[1:25,2],legend=c("Lima","Ancash","Cusco", "Arequipa","Libertad
 
 
 ## Diagrama de caja de variable - data: Componentes ambientales del suelo-EAT
-
-### A continuación, se han determinado los intervalos confianza y se han determinado el número suelos contaminados con el fin de comprobar si existe una relacion entre ambos.
+.
 ### Relavantes:
 
-Utilizaremos graficas de diagrma de caja para ver los valores atipicos y de distribucion normal para rechazar o no la hipotesis nula.
+Utilizaremos gráficas de diagrama de caja para ver los valores atípicos que pueden representar suelos contaminados o no. Aparte usaremos la distribución normal para rechazar o no la hipotesis nula. En las tablas ponemos el tipo de elemento, la cantidad de suelos no contaminados, la media y la mediana muestral .
 
 ```{r, echo=FALSE}
 boxplot(CAS$Arsénico, horizontal = TRUE, main = "Arsénico", col="cornsilk2", xlab= "Arsénico (mg/m3)",pch= 19, ylim=c(0,400) )
@@ -174,7 +173,7 @@ Tab
 ```
 
 
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media poblacional es menor o igual a 40ppm . Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un nivel de confianza del 95%. La hipotesis nula es que la media poblacional es menor o igual a 40ppm . Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227,
 intercalo de confianza del 95%,
@@ -199,7 +198,7 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 
 ```
-El estadistico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipotesis nula que la la meida poblacional es menor o igual a 40 ppm
+El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipotesis nula de que la media poblacional es menor o igual a 40 ppm
 ```{r}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
@@ -223,7 +222,7 @@ Tab
 
 ```
 
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es menor o igual a 3500. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un nivel de confianza del 95%. La hipotesis nula es que la media es menor o igual a 3500. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
@@ -246,7 +245,7 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-El estadistico de prueba es la linea azul y el z critico es la linea roja
+El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipotesis nula de que la media poblacional es menor o igual a 3500 ppm. Para este caso la media poblacional es mucho mas grande que la media muestral por lo que se le un estadistco de prueba de -197.27. 
 ```{r}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
@@ -271,7 +270,7 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es menor o igual a 3. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un nivel de confianza del 95%. La hipotesis nula es que la media es menor o igual a 3. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
@@ -296,7 +295,7 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-El estadistico de prueba es la linea azul y el z critico es la linea roja
+El estadístico de prueba es la linea azul y el z critico es la linea roja. Rechazamos la hipotesis nula de que la media poblacional es menor o igual a 3 ppm. Para este caso nuestra media muestral es mas grande la la media poblacional.
 ```{r}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
@@ -309,6 +308,8 @@ Tab
 
 
 ### Ciauro libre
+
+En las muestras solo se encontraron 14 suelos que prensentaron Cianuro libre.
 ```{r, echo=FALSE}
 plot(CAS$`Cianuro libre`, main = "Cianuro Libre",ylab="Cianuro Libre (ppm)")
 
@@ -333,8 +334,8 @@ Elemento <- c("Cromo")
 Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
-varia entre 1-1500 mg/kg
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media menor o igual a 100. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+
+Una muestra de 227 con un nivel de confianza del 95%. La hipotesis nula es que la media menor o igual a 100. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
@@ -349,7 +350,7 @@ Media_Muestral <- mean(CAS$Cromo, na.rm=TRUE)
 Desviacion_Estandar_Muestral <- sd(CAS$Cromo, na.rm=TRUE)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
 
-Xs <- seq(-50, 50, by = 0.1)
+Xs <- seq(-5, 5, by = 0.1)
 plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
 abline(v = z, lty = 2, col = "red")
 abline(h = 0, col = "gray")
@@ -359,7 +360,7 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-El estadistico de prueba es la linea azul y el z critico es la linea roja
+El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipotesis nula de que la media poblacional es menor o igual a 100 ppm. 
 ```{r}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
@@ -383,7 +384,7 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es menor o igual a 1.749. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un nivel de confianza del 95%. La hipotesis nula es que la media es menor o igual a 1.749. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
@@ -399,7 +400,7 @@ Desviacion_Estandar_Muestral <- sd(CAS$Mercurio, na.rm=TRUE)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
 
 
-Xs <- seq(-50, 10, by = 0.1)
+Xs <- seq(-5, 5, by = 0.1)
 plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
 abline(v = z, lty = 2, col = "red")
 abline(h = 0, col = "gray")
@@ -409,7 +410,7 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-El estadistico de prueba es la linea azul y el z critico es la linea roja
+El estadistico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipotesis nula de que la media poblacional es menor o igual a 1.749  ppm. 
 ```{r}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
@@ -432,7 +433,7 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 
-Una muestra de 227 con un intervalo de confianza del 75%. La hipotesis nula es que la media es menor o igual a 140. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un nivel de confianza del 75%. La hipotesis nula es que la media es menor o igual a 140. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
@@ -456,7 +457,7 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 
 ```
-El estadistico de prueba es la linea azul y el z critico es la linea roja
+El estadistico de prueba es la linea azul y el z critico es la linea roja. Rechazamos la hipotesis nula de que la media poblacional es menor o igual a 140 ppm. 
 ```{r}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
@@ -478,8 +479,8 @@ Elemento <- c("Níquel")
 Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
-varia entre 1-1500 mg/kg
-Una muestra de 227 con un intervalo de confianza del 75%. La hipotesis nula es que la media es menor o igual a 277. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+
+Una muestra de 227 con un nivel de confianza del 75%. La hipotesis nula es que la media es menor o igual a 277. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
@@ -503,7 +504,7 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-El estadistico de prueba es la linea azul y el z critico es la linea roja
+El estadistico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipotesis nula de que la media poblacional es menor o igual a 277 ppm. 
 ```{r}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
@@ -524,13 +525,13 @@ Elemento <- c("Cobre")
 Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
-Una muestra de 227 con un intervalo de confianza del 75%. La hipotesis nula es que la media es menor o igual a 91. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un nivel de confianza del 75%. La hipotesis nula es que la media es menor o igual a 91. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
 nivel de significancia del 5%
-ho: u=277
-hi u<277 o u>277
+ho: u<=91
+hi u>91
 ```{r, echo=FALSE}
 u = 91
 n=227
@@ -539,7 +540,7 @@ Media_Muestral <- mean(CAS$Cobre, na.rm=TRUE)
 Desviacion_Estandar_Muestral <- sd(CAS$Cobre, na.rm=TRUE)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
 
-Xs <- seq(-35, 10, by = 0.2)
+Xs <- seq(-5, 5, by = 0.2)
 plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
 abline(v = z, lty = 2, col = "red")
 abline(h = 0, col = "gray")
@@ -547,7 +548,7 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-El estadistico de prueba es la linea azul y el z critico es la linea roja
+El estadistico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipotesis nula de que la media poblacional es menor o igual a 91 ppm. Para este caso nuestra media muestral es mas grande la la media poblacional.
 ```{r}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
@@ -572,13 +573,13 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 
-Una muestra de 227 con un intervalo de confianza del 95%. La hipotesis nula es que la media es igual a 23.26. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un nivel de confianza del 95%. La hipotesis nula es que la media es igual a 23.26. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
 n=227
 intercalo de confianza del 95%
 nivel de significancia del 5%
-ho: u=23.26
-hi u<23.26 o u>23.26
+ho: u<=64
+hi u>64
 ```{r, echo = FALSE}
 u = 64
 n=227
@@ -587,14 +588,14 @@ Media_Muestral <- mean(CAS$Cromo, na.rm=TRUE)
 Desviacion_Estandar_Muestral <- sd(CAS$Cromo, na.rm=TRUE)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
 
-Xs <- seq(-35, 10, by = 0.2)
+Xs <- seq(-5, 5, by = 0.2)
 plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
 abline(v = z, lty = 2, col = "red")
 abline(h = 0, col = "gray")
 abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
-El estadistico de prueba es la linea azul y el z critico es la linea roja
+El estadistico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipotesis nula de que la media poblacional es menor o igual a 64 ppm. 
 ```{r}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
@@ -604,6 +605,8 @@ Tab <- data.frame(N, Valores)
 Tab
 ```
 
+### Conclusiones generales
+ En nuestras gráficas de diagrama de caja varios elementos contaminantes presentan valores atípicos pero no todos significan suelos contaminantes. Para las hipotesis nulas muchas no se rechazan pero el estadístico de prueba es muy grande, puede ser generado por una media poblacional muy grande. Para corregirlo necesitaremos una muestra mas grande para precisar nuestros resultados.
 
 
 ### OTROS CONTAMINANTES
@@ -633,40 +636,23 @@ Tab
 
 
 ### Regresion lineal
-Para la regresion lineal buscamos encontrar una posible relacion entre los elementos 
+Para la regresion lineal buscamos encontrar una posible relación entre los elementos.a
 
 ```{r, echo=FALSE}
-l1<- lm(CAS$Mercurio~CAS$Plomo)
-cor(CAS$Mercurio,CAS$Plomo)
-plot(CAS$Plomo,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300), xlab="Plomo (ppm)", ylab="Mercurio (ppm)")
+l1<- lm(CAS$Bario~CAS$Plomo)
+cor(CAS$Bario,CAS$Plomo)
+plot(CAS$Plomo,CAS$Bario,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300), xlab="Plomo (ppm)", ylab="Bario (ppm)")
 abline(l1, col="red")
-```
-
-
-
-```{r, echo = FAlSE}
-l1 <- lm(CAS$Mercurio~CAS$Bario)
-cor(CAS$Mercurio,CAS$Bario)
-plot(CAS$Bario,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300),xlab="Bario (ppm)", ylab="Mercurio (ppm)")
-abline(l1, col="red")
-```
-
-
-
-```{r, echo = FALSE}
-l1 <- lm(CAS$Mercurio~CAS$Cadmio)
-plot(CAS$Cadmio,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,10300),xlab="Cadmio (ppm)", ylab="Mercurio (ppm)")
-abline(l1, col="red")
-cor(CAS$Mercurio,CAS$Cadmio, use="complete.obs")
 ```
 
 
 
 ```{r, echo=FALSE}
-l1 <- lm(CAS$Mercurio~CAS$Cobalto)
-plot(CAS$Cobalto,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300),xlab="Cobalto (ppm)", ylab="Mercurio (ppm)")
+l1 <- lm(CAS$Bario~CAS$Cobalto)
+plot(CAS$Cobalto,CAS$Bario,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300),xlab="Cobalto (ppm)", ylab="Bario (ppm)")
 abline(l1, col="red")
-cor(CAS$Mercurio,CAS$Cobalto,use="complete.obs")
+cor(CAS$Bario,CAS$Cobalto,use="complete.obs")
+
 ```
 
 
@@ -699,10 +685,8 @@ cor(CAS$Plomo,CAS$Cadmio,use="complete.obs")
 
 
 ### Conclusiones:
-Los valores atipicos no significan totalmente que sean suelos contaminados por dichos elementos y para algunos elementos si.
-Si existen corelaciones moderadas pero no siempre se ajusta al modelo.
-Un elemento de depende de otro
 
+Para la regresión lineal tenemos correlaciones positivas débiles (0-0.5) 
 
 
 
