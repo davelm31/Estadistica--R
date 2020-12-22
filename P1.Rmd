@@ -9,6 +9,11 @@ rm(list=ls())
 ```{r, echo = FALSE}
 library(readr)
 library(dplyr)
+library("rgdal")
+library("rgeos")
+library("sp")
+library("tmap")
+library("leaflet")
 ```
 
 ```{r, echo = FALSE}
@@ -144,6 +149,20 @@ barplot(Tabla1920[1:25,2],legend=c("Lima","Ancash","Cusco", "Arequipa","Libertad
 ```
 
 
+## Muestras tomadas
+Son muestras elatorias de 3 deprtamentos distintos
+```{r, echo=FALSE}
+mapa <-readOGR("C:/Users/Dell/Documents/David/Ciclo 4/Estadistica y Probabilidad/Trabajos/Proyecto/Proyecto/P1/PP.shp")
+names(mapa)[4]="Departamento"
+names(mapa)
+
+Zona <- c(sum(CAS$Zona=="17 Sur"), sum(CAS$Zona=="18 Sur"), sum(CAS$Zona=="19 Sur"))
+Departamento<- c("CAJAMARCA", "UCAYALI"  ,  "AREQUIPA")
+Departamento1<-data.frame(Departamento, Zona)
+
+map1 <- merge(mapa,Departamento1, by="Departamento")
+qtm(map1,fill="Zona", col="white")
+```
 
 
 
@@ -538,17 +557,11 @@ Tab
 ```
 
 
-
-
-
-### Conclusiones del análisis de diagrama de caja y hipotesís nula
- En nuestras gráficas de diagrama de caja varios elementos contaminantes presentan valores atípicos pero no todos significan suelos contaminantes. Para las hipotesís nulas muchas no se rechazan pero el estadístico de prueba es muy grande, puede ser generado por una media poblacional muy grande. Para corregirlo necesitaremos una muestra mas grande para precisar nuestros resultados.
-
-
 ### OTROS CONTAMINANTES
 ### Las gráficas a continuacion, muestran la dispersion que existe en los diferentes contaminantes del suelo.
 
 ### Aluminio
+Para el aluminio presenta algunos valores atípicos
 ```{r, echo=FALSE}
 boxplot(CAS$Aluminio, horizontal = TRUE, main = "Aluminio", col="cornsilk2", xlab= "Aluminio (mg/m3)",pch= 19, ylim=c(0,45000) )
 abline(v = mean(CAS$Aluminio, na.rm = TRUE, ), col = "red")
@@ -571,8 +584,21 @@ Tab
 
 
 
+### Conclusiones del análisis de diagrama de caja y hipotesís nula
+Se presento diferentes diagramas de cajas en las cuales algunos tenían valores atípicos y otros no, se aplico en un filtro sobre la cantidad normal que deberia de presentar el suelo de cada compuesto. Analizando los datos los valores atípicos no significa que sean suelos contaminados como se a explicado en cada diagrama. Lo diagramas pueden presentar valores atipicos pero solo eran algunos de ellos que eran los suelos contaminados.
+Para la hipotesis nula en algunos se rechaza y en otros no. Se puede asumir en algunos la media poblacional como no. Pero para algunos casos el estadístico de prueba es muy grande y esto se debe a que en alunos casos la media poblacional es mucho mas grande que la media muestral.
+
+
+
+        
+ 
+
+
+
+
+
 ### Regresion lineal
-Para la regresion lineal buscamos encontrar una posible relación entre los elementos.a
+Para la regresion lineal queremos analizar si exite una relacion de un compuesto con otro.
 
 
 ### Bario vs Cobalto
@@ -585,7 +611,11 @@ cor(CAS$Bario,CAS$Cobalto,use="complete.obs")
 summary(l1)
 
 ```
-
+Variable dependiene: Bario
+Variable independiente: Cobalto
+p-value: 2.482e-08
+rcudrado:0.1259
+Apartir de esos datos 
 
 ### Plomo vs Bario
 
@@ -651,17 +681,6 @@ https://www.plastico.com/temas/PVC,-Cuales-son-sus-efectos-en-el-ambiente-y-la-s
 
 https://ecohabitar.org/el-pvc-en-la-construccion-y-en-nuestras-vidas/#:~:text=Los%20residuos%20de%20materiales%20de,media%20de%20los%20productos%20de
 
-
-
-
-
-```{r}
-l1 <- lm(CAS$Mercurio~CAS$Bario)
-plot(CAS$Bario,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300),xlab="Bario (ppm)", ylab="Cadmio (ppm)")
-abline(l1, col="red")
-summary(l1)
-cor(CAS$Mercurio,CAS$Bario)
-```
 
 
 
