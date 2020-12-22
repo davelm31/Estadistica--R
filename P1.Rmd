@@ -1,5 +1,5 @@
 ---
-title: "Presentación de Estadistica y probabilidad - 1"
+title: "Presentación de Estadistica y probabilidad"
 output: html_notebook
 ---
 ```{r, echo = FALSE}
@@ -26,52 +26,43 @@ CAS <- read_csv("CAS.csv", col_types = cols(Aluminio = col_number(),
     Hierro = col_number(), Litio = col_number(), 
     Magnesio = col_number(), Manganeso = col_number(), 
     Mercurio = col_number(), Molibdeno = col_number(), 
-    `Níquel` = col_number(), Plata = col_number(), 
+    `Níquel` = col_number(), Plata = col_number(), Zona = col_character(),
     Plomo = col_number(), Potasio = col_number(), 
     Selenio = col_number(),Sodio = col_number(), Talio = col_number(), 
     Titanio = col_number(), Torio = col_number(), Uranio = col_number(), Zinc = col_number()))
 
 ```
 
-```{r, echo=FALSE}
-CAA <- read_csv("CAA.csv", col_types = cols(Aluminio = col_number(), 
-    `Aluminio disuelto` = col_number(), Amoniaco = col_number(), 
-    Antimonio = col_number(), `Antimonio disuelto` = col_number(), 
-    `Arsénico` = col_number(), `Arsénico disuelto` = col_number(), 
-    Bario = col_number(), `Bario disuelto` = col_number(), 
-    Berilio = col_number(), `Berilio disuelto` = col_number(), 
-    Bicarbonatos = col_number(), Bismuto = col_number(), 
-    `Bismuto disuelto` = col_number(), Boro = col_number(), 
-    `Boro disuelto` = col_number(), Cadmio = col_number(), 
-    `Cadmio disuelto` = col_number(), Calcio = col_number(), 
-    `Calcio disuelto` = col_number(), Carbonatos = col_number(), 
-    Caudal = col_number(), `Cianuro libre` = col_number(), 
-    `Cianuro Wad` = col_number(), Cloruros = col_number(), 
-    Cobalto = col_number(), `Cobalto disuelto` = col_number(), 
-    Cobre = col_number(), `Cobre disuelto` = col_number(), 
-    Cromo = col_number()))
-```
-
 
 
 # Determinar la relacion entre los posibles contaminantes ambientales y el suelo 
-
+## Interantes
+#### -David León  
+#### -Harold Canto Vidal
+#### -Marcelo Surco Salas
+#### -Gonzalo Suárez
 
 ## Objetivo
-En este trabajo analizaremos la base de datos de los componentes de suelo tomado aleatoreamente. Con ello se podria determinar si existen suelos contaminados.
+Analizar la base de datos de los componentes de suelo por zonas tomado aleatoriamente para determinar suelos contaminados y su posible relación entre los compuestos.
+
+## Objetivos especficos
+#### Determinar los suelos contaminados.
+#### Analizar si la hipótesis nula en los elementos del suelo se rechaza o no.
+#### Determinar posible correlación entre los elementos.
 
 ## Importancia
+Nos permite hacer una proyección de la posible contaminación de los suelos. Este tipo de información ayuda a científicos a ver posibles soluciones para el tratamiento del suelo o futuros estudios académicos.
 
 ## Observaciones completas y datos faltantes
 
 Componentes ambientales del suelo-EAT
  
-En componentes ambientales del suelo vemos que las observaciones incompletas y las observaciones son iguales. Esto se debe en que hay muestras donde no se encuentran ciertas sustancias. Tenemos el caso de cromo hexavalente o cianuro libre.
+En componentes ambientales del suelo vemos que las observaciones incompletas y las observaciones son iguales. Se debe a que los elementos que se analizan no se encuentran en todos los suelos donde se tomaron la muestra
 ```{r echo=FALSE}
 
-Obs2 <- c("Observaciones","Observaciones incompletas","Datos faltantes", "Variables Totales")
-N2 <- c(nrow(CAS),sum(!complete.cases(CAS)),sum(is.na(CAS)), ncol(CAS))
-OB2 <- data.frame(Obs2,N2)
+Observaciones <- c("Observaciones","Observaciones incompletas","Datos faltantes", "Variables Totales")
+Cantidad <- c(nrow(CAS),sum(!complete.cases(CAS)),sum(is.na(CAS)), ncol(CAS))
+OB2 <- data.frame(Observaciones,Cantidad)
 OB2
 ```
 
@@ -84,7 +75,7 @@ OB2
 ### Variables Nominales
 Bases de datos de las denuncias las variables a usar son:
 ```{r, echo =FALSE}
-Variables <- c("Departamento", "Provincia" ,"Distrito", "Actividad económica","Tipo de contaminacion","Estado de la demanda")
+Variables <- c("Zonas","Departamento", "Provincia" ,"Distrito", "Actividad económica","Tipo de contaminacion","Estado de la demanda")
 
 `Tipo_de_Variable` <- c("Nominal","Nominal","Nominal","Nominal","Nominal", "Nominal")
 Restricciones <- c("En el Peru","En el Peru", "En el Peru", "Legales","Agua, SUelo, Aire, Fauna" ,"Abierta o Cerrada")
@@ -95,7 +86,7 @@ ED
  
 ### Variables Discretas:
 
-Para la base de datos del suelo se usaran los componentes como variables ya que nos permitiran determinar si son  suelos contaminados o no. Las unidades de medida son partes por millon (ppm)
+Para la base de datos del suelo se usaran los componentes como variables, ya que nos ayudad a determinar si son  suelos contaminados o no. Las unidades de medida son partes por millon (ppm). 
 
 ```{r, echo=FALSE}
 Variables2 <- c("ESTE","NORTE","Aluminio","Antionio","Arsénico",	"Bario","Berilio","Bismuto","Boro","Cadmio","Calcio","Cerio","Cianuro libre","Cobalto","Cobre","Cromo","Cromo Hexavelante","Estaño", "Estroncio","Fósforo","Hierro","Litio","Magnecio","Manganeso","Mercurio","Molibdeno","Níquel","Plata","Plomo","Potasio","Selenio","Sodio","Talio","Torio")
@@ -112,10 +103,10 @@ ED2
 
 
 
-
+## Importancia del estudio del suelo
 
 ## Cantidad de denuncia por tipo de contaminación en los años 2019-2020
-La razon de porque elegimos analizar los suelos es porque del 2019 al 2020 se presentaron diferentes denucnas por diferente sector donde la mayor cantidad de denuncias era la del suelo
+La razón de porque elegimos analizar los suelos es porque del 2019 al 2020 se presentaron diferentes denuncias por diferente sector donde la mayor cantidad de denuncias era la del suelo.
 
 ###La grafica a continuacion brinda información relevante sobre las actividades economicas en el Perú que se ven afectadas por contaminantes ambientales como Bromo, Cromo, Mercurio ,etc durante el transcurso de los años 2019-2020.
 ```{r,  echo= FALSE}
@@ -133,6 +124,10 @@ barplot(DDA[1:14,2],legend=c("AGUA","SUELO","FAUNA","AIRE","FLORA","POBLACION","
 ```
 La mayor cantidad de denuncias durante los años 2019-2020 son por la contaminación de suelos, seguidos de aire y residuos solidos.
 
+## Sectores del suelo
+```{r}
+
+```
 
 
 ## Denuncias en los departamentetos
@@ -155,11 +150,18 @@ barplot(Tabla1920[1:25,2],legend=c("Lima","Ancash","Cusco", "Arequipa","Libertad
 
 
 
-## Diagrama de caja de variable - data: Componentes ambientales del suelo-EAT
-.
-### Relavantes:
 
-Utilizaremos gráficas de diagrama de caja para ver los valores atípicos que pueden representar suelos contaminados o no. Aparte usaremos la distribución normal para rechazar o no la hipotesis nula. En las tablas ponemos el tipo de elemento, la cantidad de suelos no contaminados, la media y la mediana muestral .
+
+## Diagrama de caja de variable - data: Componentes ambientales del suelo-EAT
+
+### Relavantes
+
+Utilizaremos gráficas de diagrama de caja para ver los valores atípicos que pueden representar suelos contaminados o no. Aparte usaremos la distribución normal para rechazar o no la hipótesis nula. En las tablas ponemos el tipo de elemento, la cantidad de suelos no contaminados, la media y la mediana muestral.
+Para todos los casos usaremos
+
+#### tamaño de la muestra de 227    
+#### nivel de confianza del 95%
+#### nivel de significancia del 5%
 
 ```{r, echo=FALSE}
 boxplot(CAS$Arsénico, horizontal = TRUE, main = "Arsénico", col="cornsilk2", xlab= "Arsénico (mg/m3)",pch= 19, ylim=c(0,400) )
@@ -173,17 +175,14 @@ Tab
 ```
 
 
-Una muestra de 227 con un nivel de confianza del 95%. La hipotesis nula es que la media poblacional es menor o igual a 40ppm . Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un nivel de confianza del 95%. La hipótesis nula es que la media poblacional es menor o igual a 40ppm . Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
-n=227,
-intercalo de confianza del 95%,
-nivel de significancia del 5%,
-ho: u<=40
-hi  u>40
+ho: mu<=40,
+hi  mu>40
 ```{r, echo=FALSE}
 
 
-u = 40
+mu = 40
 n=227
 z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Arsénico, na.rm=TRUE)
@@ -198,8 +197,8 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 
 ```
-El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipotesis nula de que la media poblacional es menor o igual a 40 ppm
-```{r}
+El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipótesis nula de que la media poblacional es menor o igual a 40 ppm
+```{r, echo=FALSE}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
 N<- c("Estadistico de prueba","Z critico")
@@ -222,22 +221,19 @@ Tab
 
 ```
 
-Una muestra de 227 con un nivel de confianza del 95%. La hipotesis nula es que la media es menor o igual a 3500. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un nivel de confianza del 95%. La hipótesis nula es que la media es menor o igual a 3500ppm. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
-n=227
-intercalo de confianza del 95%
-nivel de significancia del 5%
-ho: u<=3500
-hi  u>3500
+ho: mu<=3500,
+hi  mu>3500
 ```{r, echo=FALSE}
-u = 3500
+mu = 3500
 n=227
 z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Bario, na.rm=TRUE)
 Desviacion_Estandar_Muestral <- sd(CAS$Bario, na.rm=TRUE)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
 
-Xs <- seq(-5, 5, by = 0.1)
+Xs <- seq(-5, 13, by = 0.1)
 plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
 abline(v = z, lty = 2, col = "red")
 abline(h = 0, col = "gray")
@@ -245,8 +241,8 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipotesis nula de que la media poblacional es menor o igual a 3500 ppm. Para este caso la media poblacional es mucho mas grande que la media muestral por lo que se le un estadistco de prueba de -197.27. 
-```{r}
+El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipótesis nula de que la media poblacional es menor o igual a 3500 ppm. Para este caso la media poblacional es mucho mas grande que la media muestral por lo que se le un estadistco de prueba de -197.27. 
+```{r, echo=FALSE}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
 N<- c("Estadistico de prueba","Z critico")
@@ -270,22 +266,19 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 
-Una muestra de 227 con un nivel de confianza del 95%. La hipotesis nula es que la media es menor o igual a 3. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un nivel de confianza del 95%. La hipótesis nula es que la media es menor o igual a 3ppm. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
-n=227
-intercalo de confianza del 95%
-nivel de significancia del 5    5%
-ho: u<=3
-hi u>3
+ho: mu<=3,
+hi mu>3
 ```{r, echo=FALSE}
-u = 3
+mu = 3
 n=227
 z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Cadmio, na.rm=TRUE)
 Desviacion_Estandar_Muestral <- sd(CAS$Cadmio, na.rm=TRUE)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
 
-Xs <- seq(-4, 4, by = 0.1)
+Xs <- seq(-4, 11, by = 0.1)
 plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
 abline(v = z, lty = 2, col = "red")
 abline(h = 0, col = "gray")
@@ -295,8 +288,8 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-El estadístico de prueba es la linea azul y el z critico es la linea roja. Rechazamos la hipotesis nula de que la media poblacional es menor o igual a 3 ppm. Para este caso nuestra media muestral es mas grande la la media poblacional.
-```{r}
+El estadístico de prueba es la linea azul y el z critico es la linea roja. Rechazamos la hipótesis nula de que la media poblacional es menor o igual a 3 ppm. Para este caso nuestra media muestral es mas grande la la media poblacional.
+```{r, echo=FALSE}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
 N<- c("Estadistico de prueba","Z critico")
@@ -335,22 +328,19 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 
-Una muestra de 227 con un nivel de confianza del 95%. La hipotesis nula es que la media menor o igual a 100. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un nivel de confianza del 95%. La hipótesis nula es que la media menor o igual a 100ppm. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
-n=227
-intercalo de confianza del 95%
-nivel de significancia del 5%
-ho: u<= 100
-hi u>100
+ho: mu<= 100,
+hi mu>100
 ```{r, echo=FALSE}
-u = 100
+mu = 100
 n=227
 z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Cromo, na.rm=TRUE)
 Desviacion_Estandar_Muestral <- sd(CAS$Cromo, na.rm=TRUE)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
 
-Xs <- seq(-5, 5, by = 0.1)
+Xs <- seq(-12, 5, by = 0.1)
 plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
 abline(v = z, lty = 2, col = "red")
 abline(h = 0, col = "gray")
@@ -360,8 +350,8 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipotesis nula de que la media poblacional es menor o igual a 100 ppm. 
-```{r}
+El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipótesis nula de que la media poblacional es menor o igual a 100 ppm. 
+```{r, echo =FALSE}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
 N<- c("Estadistico de prueba","Z critico")
@@ -384,15 +374,12 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 
-Una muestra de 227 con un nivel de confianza del 95%. La hipotesis nula es que la media es menor o igual a 1.749. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un nivel de confianza del 95%. La hipótesis nula es que la media es menor o igual a 6.6 ppm. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
-n=227
-intercalo de confianza del 95%
-nivel de significancia del 5%
-ho: u=1.749
-hi u<1.749 o u>1.749
+ho: mu<=6.6,
+hi  mu>6.6
 ```{r, echo=FALSE}
-u = 6.6
+mu = 6.6
 n=227
 z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Mercurio, na.rm=TRUE)
@@ -410,8 +397,8 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-El estadistico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipotesis nula de que la media poblacional es menor o igual a 1.749  ppm. 
-```{r}
+El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipótesis nula de que la media poblacional es menor o igual a 1.749  ppm. 
+```{r, echo=FALSE}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
 N<- c("Estadistico de prueba","Z critico")
@@ -433,12 +420,9 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 
-Una muestra de 227 con un nivel de confianza del 75%. La hipotesis nula es que la media es menor o igual a 140. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un nivel de confianza del 75%. La hipótesis nula es que la media es menor o igual a 140ppm. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
-n=227
-intercalo de confianza del 95%
-nivel de significancia del 5%
-ho: u<=140
+ho: u<=140,
 hi u>140
 ```{r, echo=FALSE}
 u = 140
@@ -457,8 +441,8 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 
 ```
-El estadistico de prueba es la linea azul y el z critico es la linea roja. Rechazamos la hipotesis nula de que la media poblacional es menor o igual a 140 ppm. 
-```{r}
+El estadístico de prueba es la linea azul y el z critico es la linea roja. Rechazamos la hipótesis nula de que la media poblacional es menor o igual a 140 ppm. 
+```{r, echo=FALSE}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
 N<- c("Estadistico de prueba","Z critico")
@@ -480,13 +464,10 @@ Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
 
-Una muestra de 227 con un nivel de confianza del 75%. La hipotesis nula es que la media es menor o igual a 277. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un nivel de confianza del 75%. La hipótesis nula es que la media es menor o igual a 300 ppm. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
-n=227
-intercalo de confianza del 95%
-nivel de significancia del 5%
-ho: u=277
-hi u<277 o u>277
+ho: u<=300
+hi: u>300
 ```{r, echo=FALSE}
 u = 300
 n=227
@@ -504,8 +485,8 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-El estadistico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipotesis nula de que la media poblacional es menor o igual a 277 ppm. 
-```{r}
+El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipótesis nula de que la media poblacional es menor o igual a 277 ppm. 
+```{r, echo=FALSE}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
 N<- c("Estadistico de prueba","Z critico")
@@ -525,13 +506,10 @@ Elemento <- c("Cobre")
 Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
 Tab
 ```
-Una muestra de 227 con un nivel de confianza del 75%. La hipotesis nula es que la media es menor o igual a 91. Al ser una muestra mayor a 30 trabajaremos con qnorm.
+Una muestra de 227 con un nivel de confianza del 75%. La hipótesis nula es que la media es menor o igual a 91ppm. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
-n=227
-intercalo de confianza del 95%
-nivel de significancia del 5%
 ho: u<=91
-hi u>91
+hi: u>91
 ```{r, echo=FALSE}
 u = 91
 n=227
@@ -548,55 +526,8 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-El estadistico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipotesis nula de que la media poblacional es menor o igual a 91 ppm. Para este caso nuestra media muestral es mas grande la la media poblacional.
-```{r}
-z <- qnorm(0.95)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
-N<- c("Estadistico de prueba","Z critico")
-Valores <- c(Zcritico,z)
-Tab <- data.frame(N, Valores)
-Tab
-```
-
-
-
-### Cromo
-
+El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipótesis nula de que la media poblacional es menor o igual a 91 ppm. Para este caso nuestra media muestral es mas grande la la media poblacional.
 ```{r, echo=FALSE}
-boxplot(CAS$Cromo, horizontal = TRUE, main = "Cromo", col="cornsilk2", xlab= "Cromo (mg/m3)",pch= 19, ylim=c(0,200) )
-abline(v = mean(CAS$Cromo, na.rm = TRUE, ), col = "red")
-Media <- mean(CAS$Cromo, na.rm=TRUE, col="red")
-Mediana <-median(CAS$Cromo, na.rm=TRUE)
-No_contaminado <- sum(CAS$Cromo > 1 & CAS$Cromo < 250,na.rm=TRUE)
-Elemento <- c("Cromo")
-Tab <- data.frame(Elemento,No_contaminado,Media,Mediana)
-Tab
-```
-
-Una muestra de 227 con un nivel de confianza del 95%. La hipotesis nula es que la media es igual a 23.26. Al ser una muestra mayor a 30 trabajaremos con qnorm.
-Datos:
-n=227
-intercalo de confianza del 95%
-nivel de significancia del 5%
-ho: u<=64
-hi u>64
-```{r, echo = FALSE}
-u = 64
-n=227
-z <- qnorm(0.95)
-Media_Muestral <- mean(CAS$Cromo, na.rm=TRUE)
-Desviacion_Estandar_Muestral <- sd(CAS$Cromo, na.rm=TRUE)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
-
-Xs <- seq(-5, 5, by = 0.2)
-plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
-abline(v = z, lty = 2, col = "red")
-abline(h = 0, col = "gray")
-abline(v = Zcritico,lty = 1 , col = "blue")
-
-```
-El estadistico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipotesis nula de que la media poblacional es menor o igual a 64 ppm. 
-```{r}
 z <- qnorm(0.95)
 Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
 N<- c("Estadistico de prueba","Z critico")
@@ -605,8 +536,12 @@ Tab <- data.frame(N, Valores)
 Tab
 ```
 
-### Conclusiones generales
- En nuestras gráficas de diagrama de caja varios elementos contaminantes presentan valores atípicos pero no todos significan suelos contaminantes. Para las hipotesis nulas muchas no se rechazan pero el estadístico de prueba es muy grande, puede ser generado por una media poblacional muy grande. Para corregirlo necesitaremos una muestra mas grande para precisar nuestros resultados.
+
+
+
+
+### Conclusiones del análisis de diagrama de caja y hipotesís nula
+ En nuestras gráficas de diagrama de caja varios elementos contaminantes presentan valores atípicos pero no todos significan suelos contaminantes. Para las hipotesís nulas muchas no se rechazan pero el estadístico de prueba es muy grande, puede ser generado por una media poblacional muy grande. Para corregirlo necesitaremos una muestra mas grande para precisar nuestros resultados.
 
 
 ### OTROS CONTAMINANTES
@@ -638,55 +573,94 @@ Tab
 ### Regresion lineal
 Para la regresion lineal buscamos encontrar una posible relación entre los elementos.a
 
-```{r, echo=FALSE}
-l1<- lm(CAS$Bario~CAS$Plomo)
-cor(CAS$Bario,CAS$Plomo)
-plot(CAS$Plomo,CAS$Bario,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300), xlab="Plomo (ppm)", ylab="Bario (ppm)")
-abline(l1, col="red")
-```
 
-
+### Bario vs Cobalto
 
 ```{r, echo=FALSE}
 l1 <- lm(CAS$Bario~CAS$Cobalto)
 plot(CAS$Cobalto,CAS$Bario,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300),xlab="Cobalto (ppm)", ylab="Bario (ppm)")
 abline(l1, col="red")
 cor(CAS$Bario,CAS$Cobalto,use="complete.obs")
+summary(l1)
 
 ```
 
 
-
+### Plomo vs Bario
 
 ```{r, echo=FALSE}
 l1 <- lm(CAS$Plomo~CAS$Bario)
 plot(CAS$Bario,CAS$Plomo,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1000),xlab="Bario (ppm)", ylab="Plomo (ppm)")
 abline(l1, col="red")
 cor(CAS$Plomo,CAS$Bario,use="complete.obs")
+summary(l1)
 ```
 
-
+### Cobalto vs Bario
 
 ```{r, echo=FALSE}
 l1 <- lm(CAS$Cobalto~CAS$Bario)
 plot(CAS$Bario,CAS$Cobalto,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1000),xlab="Bario (ppm)", ylab="Cobalto (ppm)")
 abline(l1, col="red")
 cor(CAS$Bario,CAS$Cobalto,use="complete.obs")
+summary(l1)
 ```
-
+### Cadmio vs Plomo
 
 ```{r, echo=False}
 l1 <- lm(CAS$Cadmio~CAS$Plomo)
 plot(CAS$Plomo,CAS$Cadmio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300),xlab="Plomo (ppm)", ylab="Cadmio (ppm)")
 abline(l1, col="red")
 cor(CAS$Plomo,CAS$Cadmio,use="complete.obs")
+
+summary(l1)
 ```
 
+### Cadmio vs Bario
+Dentro de nuestra base de datos notamos que existen suelos contaminados por bario y cadmio. Estos dos componentes están presentes en el PVC (Policloruro de vinilo) el cuál genera gran contaminación en el suelo y agua. En este estudio se buscará encontrar una relación entre estos dos componentes para determinar si su presencia se debe a una posible contaminación por PVC.
+
+```{r}
+contaminado <- filter(CAS, Cadmio > 4000 & Bario > 400)
+plot(contaminado$Bario,contaminado$Cadmio ,xlab="Bario (ppm)", ylab="Cadmio (ppm)", main = "Contaminados")
+a1<- cor(cadmio_contaminado$Bario,cadmio_contaminado$Cadmio)
+
+l1 <- lm(CAS$Cadmio~CAS$Bario)
+plot(CAS$Bario,CAS$Cadmio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300),xlab="Bario (ppm)", ylab="Cadmio (ppm)")
+abline(l1, col="red")
+a2<- cor(CAS$Bario,CAS$Cadmio,use="complete.obs")
+correlacion <- c("C. Contaminados", "C.Bario y Cadmio")
+N <- c(a1,a2)
+Tab<- data.frame(correlacion,N)
+Tab
+
+```
+La variable contaminado es un filtro entre los suelos contaminados de cadmio y bario. La primera gráfica es el cadmio contaminado en función del bario contaminado. La segunda gráfica es el cadmio total en función de bario total. Se observan pocas observaciones en la primera tabla y no se puede concluir si es contaminado por PVC
 
 
 ### Conclusiones:
 
-Para la regresión lineal tenemos correlaciones positivas débiles (0-0.5) 
+Para la regresión lineal tenemos correlaciones positivas débiles (0-0.5). En nuestras gráficas la mayoria son correlaciones positivas débiles. Ponemos a un elemento en función de otros pero no necesariamente están en relación. No es seguro determinar que los suelos contaminados por bario y cadmio fueron causados por presencia de PVC, ya que las cantidad de observaciones con ambos compuestos contaminados no es suficiente para hallar una correlación precisa. No buscamos relación entre los otros compuestos porque nuestra base de datos no presenta grado de contaminación respecto a los otros componentes siendo esta opción no viable. 
+
+
+### Bibliografia 
+
+
+https://www.plastico.com/temas/PVC,-Cuales-son-sus-efectos-en-el-ambiente-y-la-salud-humana+3027117?pagina=2
+
+
+https://ecohabitar.org/el-pvc-en-la-construccion-y-en-nuestras-vidas/#:~:text=Los%20residuos%20de%20materiales%20de,media%20de%20los%20productos%20de
+
+
+
+
+
+```{r}
+l1 <- lm(CAS$Mercurio~CAS$Bario)
+plot(CAS$Bario,CAS$Mercurio,pch=20, col=rgb(0,0,0,0.3),xlim=c(0,1300),xlab="Bario (ppm)", ylab="Cadmio (ppm)")
+abline(l1, col="red")
+summary(l1)
+cor(CAS$Mercurio,CAS$Bario)
+```
 
 
 
