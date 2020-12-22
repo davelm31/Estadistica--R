@@ -124,11 +124,6 @@ barplot(DDA[1:14,2],legend=c("AGUA","SUELO","FAUNA","AIRE","FLORA","POBLACION","
 ```
 La mayor cantidad de denuncias durante los años 2019-2020 son por la contaminación de suelos, seguidos de aire y residuos solidos.
 
-## Sectores del suelo
-```{r}
-
-```
-
 
 ## Denuncias en los departamentetos
 
@@ -162,7 +157,13 @@ Para todos los casos usaremos
 #### tamaño de la muestra de 227    
 #### nivel de confianza del 95%
 #### nivel de significancia del 5%
+####El estadístico de prueba es la linea azul 
+#### z critico es la linea roja.
 
+
+## Arsénico
+
+En este diagrama de caja se observa 4 valores atípicos que se pueden interpretar como suelos contaminados por Arsénco, pero en nuestra tabla usamos un filtro en el cual la cantidad normal de arsenico en el suelo es de 0.001 a 250 partes por millon. Los suelos no contminados son 226 es decir solo 1 es contaminado. 
 ```{r, echo=FALSE}
 boxplot(CAS$Arsénico, horizontal = TRUE, main = "Arsénico", col="cornsilk2", xlab= "Arsénico (mg/m3)",pch= 19, ylim=c(0,400) )
 abline(v = mean(CAS$Arsénico, na.rm = TRUE, ), col = "red")
@@ -180,27 +181,24 @@ Datos:
 ho: mu<=40,
 hi  mu>40
 ```{r, echo=FALSE}
-
-
 mu = 40
 n=227
 z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Arsénico, na.rm=TRUE)
 Desviacion_Estandar_Muestral <- sd(CAS$Arsénico, na.rm=TRUE)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+Zcritico <- (Media_Muestral-mu)/(Desviacion_Estandar_Muestral/sqrt(n))
 
 Xs <- seq(-4, 4, by = 0.1)
 plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
 abline(v = z, lty = 2, col = "red")
 abline(h = 0, col = "gray")
 abline(v = Zcritico,lty = 1 , col = "blue")
-
-
 ```
-El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipótesis nula de que la media poblacional es menor o igual a 40 ppm
+El estadistico de prueba es de 0.94 y el Z critico es de 1.64 por lo tanto cae en la zona de no rechazo de la hipotesis nula. Entonces no rechazamos que la media poblacional es menor o igual a 40 ppm. Entonces podemos asumir que la media poblacional del arsénico es menor o igual a 40 partes por millon
+
 ```{r, echo=FALSE}
 z <- qnorm(0.95)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+Zcritico <- (Media_Muestral-mu)/(Desviacion_Estandar_Muestral/sqrt(n))
 N<- c("Estadistico de prueba","Z critico")
 Valores <- c(Zcritico,z)
 Tab <- data.frame(N, Valores)
@@ -209,6 +207,7 @@ Tab
 
 
 #### Bario
+Para el Bario prensenta muchos valores atipicos y con el filtro de la cantidad normal de Bario en el suelo son 207 suelos no contaminados, es decir, hay 20 suelos contaminados.  
 ```{r, echo=FALSE}
 boxplot(CAS$Bario, horizontal = TRUE, main = "Bario", col="cornsilk2", xlab= "Bario (mg/m3)",pch= 19, ylim=c(0,1000) )
 abline(v = mean(CAS$Bario, na.rm = TRUE, ), col = "red")
@@ -231,9 +230,9 @@ n=227
 z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Bario, na.rm=TRUE)
 Desviacion_Estandar_Muestral <- sd(CAS$Bario, na.rm=TRUE)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+Zcritico <- (Media_Muestral-mu)/(Desviacion_Estandar_Muestral/sqrt(n))
 
-Xs <- seq(-5, 13, by = 0.1)
+Xs <- seq(-198, 13, by = 0.1)
 plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
 abline(v = z, lty = 2, col = "red")
 abline(h = 0, col = "gray")
@@ -241,10 +240,10 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipótesis nula de que la media poblacional es menor o igual a 3500 ppm. Para este caso la media poblacional es mucho mas grande que la media muestral por lo que se le un estadistco de prueba de -197.27. 
+Para ete caso nuestro estadistic de prueba es de -197.27 y el z critico de 1.64, entonces cae en la zona  de no rechaza. No rechazamos la hipótesis nula de que la media poblacional es menor o igual a 3500 ppm. Entonce podemos asumir que la media poblacional del bario es menor o igual a 3500 partes por millon.
 ```{r, echo=FALSE}
 z <- qnorm(0.95)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+Zcritico <- (Media_Muestral-mu)/(Desviacion_Estandar_Muestral/sqrt(n))
 N<- c("Estadistico de prueba","Z critico")
 Valores <- c(Zcritico,z)
 Tab <- data.frame(N, Valores)
@@ -254,7 +253,7 @@ Tab
 
 
 ### Cadmio
-
+Para el cadmio presenta algunos valores atípicos y en nuestra tabla tenemos suelos no contaminados por cadmio es de 104, es decir 123 suelos esta contamiados por cadmio. Comparando con los valores atípicos son menores.
 ```{r, echo=FALSE}
 boxplot(CAS$Cadmio, horizontal = TRUE, main = "Cadmio", col="cornsilk2", xlab= "Cadmio (mg/m3)",pch= 19, ylim=c(0,9000) )
 abline(v = mean(CAS$Cadmio, na.rm = TRUE, ), col = "red")
@@ -276,7 +275,7 @@ n=227
 z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Cadmio, na.rm=TRUE)
 Desviacion_Estandar_Muestral <- sd(CAS$Cadmio, na.rm=TRUE)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+Zcritico <- (Media_Muestral-mu)/(Desviacion_Estandar_Muestral/sqrt(n))
 
 Xs <- seq(-4, 11, by = 0.1)
 plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
@@ -287,11 +286,11 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 
 ```
+El estadistico de prueba es de 11.12 y el z critico es de 1.6 entonces cae en la zona de rechazo. Rechazamos que la media poblacional del sea menor o igual a 3 ppm. No se puede asumir que la que la media poblacional del cadmio sea menor o igual a 3 partes por millon
 
-El estadístico de prueba es la linea azul y el z critico es la linea roja. Rechazamos la hipótesis nula de que la media poblacional es menor o igual a 3 ppm. Para este caso nuestra media muestral es mas grande la la media poblacional.
 ```{r, echo=FALSE}
 z <- qnorm(0.95)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+Zcritico <- (Media_Muestral-mu)/(Desviacion_Estandar_Muestral/sqrt(n))
 N<- c("Estadistico de prueba","Z critico")
 Valores <- c(Zcritico,z)
 Tab <- data.frame(N, Valores)
@@ -302,7 +301,7 @@ Tab
 
 ### Ciauro libre
 
-En las muestras solo se encontraron 14 suelos que prensentaron Cianuro libre.
+Para el Cianuro libre no podimos hacer un diagrama de caja porque se encontraba en pocos suelos entonces al usar otro diagrama se puede observar que el cianuero libre siempre esta en 3 partes por millon y solo se encontraron en 14 suelos.
 ```{r, echo=FALSE}
 plot(CAS$`Cianuro libre`, main = "Cianuro Libre",ylab="Cianuro Libre (ppm)")
 
@@ -317,6 +316,7 @@ Tab
 
 
 ### Cromo
+Para el crmo econtramos varios valores atípicos pero en nuestra tabla los suelos no contaminados por cromo son 227, es decir, no hay suelos contaminados.
 ```{r, echo=FALSE}
 boxplot(CAS$Cromo, horizontal = TRUE, main = "Cromo", col="cornsilk2", xlab= "Cromo (mg/m3)",pch= 19, ylim=c(0,100) )
 abline(v = mean(CAS$Cromo, na.rm = TRUE, ), col = "red")
@@ -338,9 +338,9 @@ n=227
 z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Cromo, na.rm=TRUE)
 Desviacion_Estandar_Muestral <- sd(CAS$Cromo, na.rm=TRUE)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+Zcritico <- (Media_Muestral-mu)/(Desviacion_Estandar_Muestral/sqrt(n))
 
-Xs <- seq(-12, 5, by = 0.1)
+Xs <- seq(-52, 5, by = 0.1)
 plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
 abline(v = z, lty = 2, col = "red")
 abline(h = 0, col = "gray")
@@ -349,11 +349,10 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 
 ```
-
-El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipótesis nula de que la media poblacional es menor o igual a 100 ppm. 
+El estadístico de prueba es de -51.32 y el z critico es de 1.64 entonces cae en la zona de no rechazamo. No rechazamos que la media poblacional es menor o igual a 100 ppm. Podemos asumir que nuestra media poblacional del cromo sea menor o igual 100 partes por millon.
 ```{r, echo =FALSE}
 z <- qnorm(0.95)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+Zcritico <- (Media_Muestral-mu)/(Desviacion_Estandar_Muestral/sqrt(n))
 N<- c("Estadistico de prueba","Z critico")
 Valores <- c(Zcritico,z)
 Tab <- data.frame(N, Valores)
@@ -363,6 +362,7 @@ Tab
 
 
 ### Mercurio
+En el mercurio no presenta valores atipicos, y los suelos no contaminados por mercurio son 227. No presenta suelos contaminados.
 ```{r, echo=FALSE}
 boxplot(CAS$Mercurio, horizontal = TRUE, main = "Mercurio", col="cornsilk2", xlab= "Mercurio (mg/m3)",pch= 19, ylim=c(0,7) )
 abline(v = mean(CAS$Mercurio, na.rm = TRUE, ), col = "red")
@@ -376,16 +376,15 @@ Tab
 
 Una muestra de 227 con un nivel de confianza del 95%. La hipótesis nula es que la media es menor o igual a 6.6 ppm. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
-ho: mu<=6.6,
-hi  mu>6.6
+ho: mu<=1.79,
+hi  mu>1.79
 ```{r, echo=FALSE}
-mu = 6.6
+mu = 1.79
 n=227
 z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Mercurio, na.rm=TRUE)
 Desviacion_Estandar_Muestral <- sd(CAS$Mercurio, na.rm=TRUE)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
-
+Zcritico <- (Media_Muestral-mu)/(Desviacion_Estandar_Muestral/sqrt(n))
 
 Xs <- seq(-5, 5, by = 0.1)
 plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
@@ -396,11 +395,11 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 
 ```
+El estadístico de prueba es de -0.394 y el z critico de 1.64 entonces cae en la zona de no rechazo. No se rechaza que la media poblacional sea menor o igual a 1.79 ppm. Se puede asumir que la media pobalcional del mercurio sea menor o igual a 1.79 partes por millon.
 
-El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipótesis nula de que la media poblacional es menor o igual a 1.749  ppm. 
 ```{r, echo=FALSE}
 z <- qnorm(0.95)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+Zcritico <- (Media_Muestral-mu)/(Desviacion_Estandar_Muestral/sqrt(n))
 N<- c("Estadistico de prueba","Z critico")
 Valores <- c(Zcritico,z)
 Tab <- data.frame(N, Valores)
@@ -409,6 +408,7 @@ Tab
 `
 
 ### Plomo
+Para el plomo presenta varios valores atípicos y en nuestra table los suelos no contaminados son 227 es decir que no hay suelos contaminados. 
 ```{r, echo=FALSE}
 boxplot(CAS$Plomo, horizontal = TRUE, main = "Plomo", col="cornsilk2", xlab= "Plomo (mg/m3)",pch= 19, ylim=c(0,1000) )
 abline(v = mean(CAS$Plomo, na.rm = TRUE, ), col = "red")
@@ -422,15 +422,15 @@ Tab
 
 Una muestra de 227 con un nivel de confianza del 75%. La hipótesis nula es que la media es menor o igual a 140ppm. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
-ho: u<=140,
-hi u>140
+ho: mu<=140,
+hi mu>140
 ```{r, echo=FALSE}
-u = 140
+mu = 140
 n=227
 z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Plomo, na.rm=TRUE)
 Desviacion_Estandar_Muestral <- sd(CAS$Plomo, na.rm=TRUE)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+Zcritico <- (Media_Muestral-mu)/(Desviacion_Estandar_Muestral/sqrt(n))
 
 Xs <- seq(-4, 4, by = 0.1)
 plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
@@ -441,10 +441,10 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 
 ```
-El estadístico de prueba es la linea azul y el z critico es la linea roja. Rechazamos la hipótesis nula de que la media poblacional es menor o igual a 140 ppm. 
+El estdisstico de prueba es 3.316 y el z critico es de 1.64 entonces cae en la zona de rechazo. Rechazamos la hipótesis nula de que la media poblacional es menor o igual a 140 ppm. No podemos asumir que la media poblacional del plomo sea menor o igual que 140 partes por millon.
 ```{r, echo=FALSE}
 z <- qnorm(0.95)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+Zcritico <- (Media_Muestral-mu)/(Desviacion_Estandar_Muestral/sqrt(n))
 N<- c("Estadistico de prueba","Z critico")
 Valores <- c(Zcritico,z)
 Tab <- data.frame(N, Valores)
@@ -452,7 +452,7 @@ Tab
 ```
 
 ### Zinc
-
+Para el zinc presenta dos valores atípicos y los suelos no contaminados por zinc son 227, es decir, no hay suelos contaminados por zinc.
 ```{r, echo=FALSE}
 boxplot(CAS$Zinc, horizontal = TRUE, main = "Zinc", col="cornsilk2", xlab= "Zinc (mg/m3)",pch= 19, ylim=c(0,1000) )
 abline(v = mean(CAS$Zinc, na.rm = TRUE, ), col = "red")
@@ -466,15 +466,15 @@ Tab
 
 Una muestra de 227 con un nivel de confianza del 75%. La hipótesis nula es que la media es menor o igual a 300 ppm. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
-ho: u<=300
-hi: u>300
+ho: mu<=300
+hi: mu>300
 ```{r, echo=FALSE}
-u = 300
+mu = 300
 n=227
 z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Zinc, na.rm=TRUE)
 Desviacion_Estandar_Muestral <- sd(CAS$Zinc, na.rm=TRUE)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+Zcritico <- (Media_Muestral-mu)/(Desviacion_Estandar_Muestral/sqrt(n))
 
 Xs <- seq(-4, 4, by = 0.1)
 plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
@@ -485,17 +485,18 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipótesis nula de que la media poblacional es menor o igual a 277 ppm. 
+El estadistico de prueba es de -1.44 y el z critico es de 1.64 entonces cae en la zona de no rechazo. No rechazamos la hipótesis nula de que la media poblacional es menor o igual a 300 ppm. Podemos asumir que la la media poblacional del zinc es menor o igual a 300 partes por milon.
 ```{r, echo=FALSE}
 z <- qnorm(0.95)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+Zcritico <- (Media_Muestral-mu)/(Desviacion_Estandar_Muestral/sqrt(n))
 N<- c("Estadistico de prueba","Z critico")
 Valores <- c(Zcritico,z)
 Tab <- data.frame(N, Valores)
 Tab
 ```
 
-### Cobre
+### Cobre 
+Para el cobre el diagrama de caja no presenta valores atípicos y los suelos no contaminados son 227, es decir, no hay suelos contaminados por cobre.
 ```{r, echo=FALSE}
 boxplot(CAS$Cobre, horizontal = TRUE, main = "Cobre", col="cornsilk2", xlab= "Cobre (mg/m3)",pch= 19, ylim=c(0,200) )
 abline(v = mean(CAS$Cobre, na.rm = TRUE, ), col = "red")
@@ -508,17 +509,17 @@ Tab
 ```
 Una muestra de 227 con un nivel de confianza del 75%. La hipótesis nula es que la media es menor o igual a 91ppm. Al ser una muestra mayor a 30 trabajaremos con qnorm.
 Datos:
-ho: u<=91
-hi: u>91
+ho: mu<=91
+hi: mu>91
 ```{r, echo=FALSE}
-u = 91
+mu = 91
 n=227
 z <- qnorm(0.95)
 Media_Muestral <- mean(CAS$Cobre, na.rm=TRUE)
 Desviacion_Estandar_Muestral <- sd(CAS$Cobre, na.rm=TRUE)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+Zcritico <- (Media_Muestral-mu)/(Desviacion_Estandar_Muestral/sqrt(n))
 
-Xs <- seq(-5, 5, by = 0.2)
+Xs <- seq(-32, 5, by = 0.2)
 plot(Xs, dnorm(Xs), type = "l", col="black", xlab = "", ylab = "")
 abline(v = z, lty = 2, col = "red")
 abline(h = 0, col = "gray")
@@ -526,10 +527,10 @@ abline(v = Zcritico,lty = 1 , col = "blue")
 
 ```
 
-El estadístico de prueba es la linea azul y el z critico es la linea roja. No rechazamos la hipótesis nula de que la media poblacional es menor o igual a 91 ppm. Para este caso nuestra media muestral es mas grande la la media poblacional.
+El estadístico de prueba es de -31.57 y el z critico es de 1.64 entonces cae en la zona de no rechazo. No rechazamos la hipótesis nula de que la media poblacional es menor o igual a 91 ppm. Podemos asumir que la media poblacional del cobre es menor o igual a 91 partes por millon.
 ```{r, echo=FALSE}
 z <- qnorm(0.95)
-Zcritico <- (Media_Muestral-u)/(Desviacion_Estandar_Muestral/sqrt(n))
+Zcritico <- (Media_Muestral-mu)/(Desviacion_Estandar_Muestral/sqrt(n))
 N<- c("Estadistico de prueba","Z critico")
 Valores <- c(Zcritico,z)
 Tab <- data.frame(N, Valores)
